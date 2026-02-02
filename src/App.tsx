@@ -27,7 +27,6 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import DashboardGold from "./pages/DashboardGold";
 import AIBot from "./pages/AIBot";
-import Browser from "./pages/Browser";
 import Roadmap from "./pages/Roadmap";
 import Notes from "./pages/Notes";
 import FocusRoom from "./pages/FocusRoom";
@@ -39,7 +38,6 @@ import Profile from "./pages/Profile";
 import Opportunities from "./pages/Opportunities";
 import NotFound from "./pages/NotFound";
 import StudyPlanner from "./pages/StudyPlanner";
-import StudyGroups from "./pages/StudyGroups";
 import Workspace from "./pages/Workspace";
 import SmartDeadline from "./pages/SmartDeadline";
 import KnowledgeOrbit from "./pages/KnowledgeOrbit";
@@ -47,7 +45,7 @@ import GameHub from "./pages/GameHub";
 import GameDetail from "./pages/GameDetail";
 import GameCompetitionLobby from "./pages/GameCompetitionLobby";
 import GameMatchResults from "./pages/GameMatchResults";
-import PerformanceTiers from "./pages/PerformanceTiers";
+
 import Wellness from "./pages/Wellness";
 import SignLanguage from "./pages/SignLanguage";
 import SignLanguageSetup from "./pages/SignLanguageSetup";
@@ -239,7 +237,7 @@ function ConditionalLayout() {
   const showSidebar = isAuthenticated && !hideNavbar;
 
   return (
-    <div className="flex min-h-screen bg-[#0C0E17]">
+    <div className="flex min-h-screen bg-black">
       {/* Persistent Sidebar */}
       {showSidebar && <Sidebar />}
 
@@ -303,26 +301,6 @@ function ConditionalLayout() {
                 <ErrorBoundary>
                   <ProtectedRoute>
                     <Notes />
-                  </ProtectedRoute>
-                </ErrorBoundary>
-              }
-            />
-            <Route
-              path="/study-groups"
-              element={
-                <ErrorBoundary>
-                  <ProtectedRoute>
-                    <StudyGroups />
-                  </ProtectedRoute>
-                </ErrorBoundary>
-              }
-            />
-            <Route
-              path="/browser"
-              element={
-                <ErrorBoundary>
-                  <ProtectedRoute>
-                    <Browser />
                   </ProtectedRoute>
                 </ErrorBoundary>
               }
@@ -550,16 +528,7 @@ function ConditionalLayout() {
               }
             />
             <Route
-              path="/performance-tiers"
-              element={
-                <ErrorBoundary>
-                  <ProtectedRoute>
-                    <PerformanceTiers />
-                  </ProtectedRoute>
-                </ErrorBoundary>
-              }
-            />
-            <Route
+
               path="/opportunities"
               element={
                 <ErrorBoundary>
@@ -714,10 +683,12 @@ const App = () => {
             <Toaster />
             <Sonner />
             <Suspense fallback={
-              <div className="flex min-h-screen items-center justify-center bg-[#0C0E17]">
+              <div className="flex min-h-screen items-center justify-center bg-black">
                 <div className="text-center">
-                  <div className="mb-4 text-6xl font-black bg-gradient-to-r from-[#BF5AF2] via-[#FF6EC7] to-[#BF5AF2] bg-clip-text text-transparent animate-pulse">Learnify</div>
-                  <div className="text-white/60">Loading your learning universe...</div>
+                  <div className="mb-4 text-6xl font-black bg-gradient-to-r from-[#DAFD78] via-[#6C5BA6] to-[#DAFD78] bg-padding-box bg-clip-text text-transparent animate-pulse">
+                    <span className="text-[#DAFD78]">Learn</span><span className="text-[#6C5BA6]">ify</span>
+                  </div>
+                  <div className="text-[#DAFD78]/60 font-medium tracking-widest uppercase text-xs">Loading your learning universe...</div>
                 </div>
               </div>
             }>

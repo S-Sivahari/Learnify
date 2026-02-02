@@ -1,13 +1,26 @@
 import { useState, useEffect } from 'react';
-import { friendsService, Friend } from '@/services/friendsService';
 import { Card } from '@/components/ui/card';
 import { Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-interface FriendWithPerformance extends Friend {
+interface FriendWithPerformance {
+    id: string;
+    name: string;
+    avatar?: string;
+    streak: number;
     score: number;
     isOnline: boolean;
 }
+
+// Mock data for demonstration
+const MOCK_FRIENDS: FriendWithPerformance[] = [
+    { id: '1', name: 'Alex Chen', avatar: '', streak: 15, score: 180, isOnline: true },
+    { id: '2', name: 'Sarah Kim', avatar: '', streak: 12, score: 145, isOnline: true },
+    { id: '3', name: 'Mike Wilson', avatar: '', streak: 8, score: 92, isOnline: false },
+    { id: '4', name: 'Emma Davis', avatar: '', streak: 7, score: 78, isOnline: true },
+    { id: '5', name: 'James Brown', avatar: '', streak: 5, score: 65, isOnline: false },
+    { id: '6', name: 'Lisa Wang', avatar: '', streak: 3, score: 41, isOnline: true },
+];
 
 export function FriendsWidget() {
     const [friends, setFriends] = useState<FriendWithPerformance[]>([]);
@@ -17,22 +30,16 @@ export function FriendsWidget() {
     useEffect(() => {
         const fetchFriendsData = async () => {
             try {
-                // Fetch friends and calculate performance score
-                const allFriends = await friendsService.getFriends();
+                // TODO: Replace with real API call
+                // const allFriends = await friendsService.getFriends();
                 
-                // Calculate performance score (streak + xp/100 for ranking)
-                const friendsWithPerformance = allFriends.map(friend => ({
-                    ...friend,
-                    score: (friend.streak || 0) * 10 + Math.floor((friend.xp || 0) / 100),
-                    isOnline: Math.random() > 0.6 // Mock online status - replace with real data
-                }));
-
-                // Sort by score descending
-                friendsWithPerformance.sort((a, b) => b.score - a.score);
-
-                setFriends(friendsWithPerformance.slice(0, 6)); // Show top 6
+                // Using mock data for now
+                await new Promise(resolve => setTimeout(resolve, 500)); // Simulate loading
+                setFriends(MOCK_FRIENDS);
             } catch (error) {
                 console.error('Error fetching friends data:', error);
+                // Fallback to mock data on error
+                setFriends(MOCK_FRIENDS);
             } finally {
                 setLoading(false);
             }

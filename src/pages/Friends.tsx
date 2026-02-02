@@ -3,10 +3,12 @@ import { friendsService, Friendship, UserProfile } from '@/services/friendsServi
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Users, UserPlus, Inbox, Search, Flame, Check, X, MessageCircle, Phone, Video } from 'lucide-react';
-import { studyGroupsService } from '@/services/studyGroupsService';
+import { Users, UserPlus, Inbox, Search, Flame, Check, X, MessageCircle, Phone, Video, Trophy, TrendingUp, Medal, Hash, Plus } from 'lucide-react';
+import { studyGroupsService, type StudyGroup } from '@/services/studyGroupsService';
+import { messagingService } from '@/services/messagingService';
+import GroupChat from '@/components/studyGroups/GroupChat';
+import CreateGroupModal from '@/components/studyGroups/CreateGroupModal';
 import { useNavigate } from 'react-router-dom';
 import { createCallSession, updateParticipantStatus, type CallSession } from '@/services/callingService';
 import { CallInterface } from '@/components/calling/CallInterface';
@@ -18,6 +20,7 @@ import { NotificationCenter } from '@/components/NotificationCenter';
 import { useOnlineStatus } from '@/hooks/useOnlineStatus';
 import { callSignalingService } from '@/services/callSignalingService';
 import { webrtcService } from '@/services/webrtcService';
+import { motion } from 'framer-motion';
 
 export default function Friends() {
     const navigate = useNavigate();
@@ -27,9 +30,14 @@ export default function Friends() {
     const [pendingRequests, setPendingRequests] = useState<Friendship[]>([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [loading, setLoading] = useState(true);
+    const [groups, setGroups] = useState<StudyGroup[]>([]);
+    const [selectedGroup, setSelectedGroup] = useState<StudyGroup | null>(null);
+    const [unreadCounts, setUnreadCounts] = useState<Record<string, number>>({});
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [activeCall, setActiveCall] = useState<CallSession | null>(null);
     const [isInitiatingCall, setIsInitiatingCall] = useState(false);
     const [currentRecipientId, setCurrentRecipientId] = useState<string>('');
+    const [showFullRankings, setShowFullRankings] = useState(false);
 
     // Use the call notifications hook
     const { incomingCall, callerName, currentOffer, callerId, clearIncomingCall } = useCallNotifications();
@@ -49,9 +57,169 @@ export default function Friends() {
                 friendsService.getPendingRequests()
             ]);
 
-            setFriends(allFriends);
-            setOnlineFriends(online);
+            // Add mock data for demonstration
+            const mockFriends: UserProfile[] = [
+                {
+                    id: 'mock-1',
+                    username: 'alex_learns',
+                    display_name: 'Alex Johnson',
+                    avatar_url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=alex',
+                    status: 'online',
+                    streak: 45,
+                    level: 12,
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                },
+                {
+                    id: 'mock-2',
+                    username: 'sarah_study',
+                    display_name: 'Sarah Williams',
+                    avatar_url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sarah',
+                    status: 'online',
+                    streak: 38,
+                    level: 10,
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                },
+                {
+                    id: 'mock-3',
+                    username: 'mike_master',
+                    display_name: 'Mike Chen',
+                    avatar_url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=mike',
+                    status: 'online',
+                    streak: 52,
+                    level: 15,
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                },
+                {
+                    id: 'mock-4',
+                    username: 'emma_ace',
+                    display_name: 'Emma Davis',
+                    avatar_url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=emma',
+                    status: 'offline',
+                    streak: 28,
+                    level: 8,
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                },
+                {
+                    id: 'mock-5',
+                    username: 'james_swift',
+                    display_name: 'James Martinez',
+                    avatar_url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=james',
+                    status: 'online',
+                    streak: 67,
+                    level: 18,
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                },
+                {
+                    id: 'mock-6',
+                    username: 'lisa_bright',
+                    display_name: 'Lisa Anderson',
+                    avatar_url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=lisa',
+                    status: 'online',
+                    streak: 21,
+                    level: 6,
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                },
+                {
+                    id: 'mock-7',
+                    username: 'kevin_pro',
+                    display_name: 'Kevin Taylor',
+                    avatar_url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=kevin',
+                    status: 'offline',
+                    streak: 15,
+                    level: 5,
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                },
+                {
+                    id: 'mock-8',
+                    username: 'nina_genius',
+                    display_name: 'Nina Patel',
+                    avatar_url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=nina',
+                    status: 'online',
+                    streak: 33,
+                    level: 9,
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                },
+                {
+                    id: 'mock-9',
+                    username: 'ryan_scholar',
+                    display_name: 'Ryan Lee',
+                    avatar_url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ryan',
+                    status: 'offline',
+                    streak: 12,
+                    level: 4,
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                },
+                {
+                    id: 'mock-10',
+                    username: 'sophia_star',
+                    display_name: 'Sophia Brown',
+                    avatar_url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sophia',
+                    status: 'online',
+                    streak: 41,
+                    level: 11,
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                },
+                {
+                    id: 'mock-11',
+                    username: 'david_elite',
+                    display_name: 'David Wilson',
+                    avatar_url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=david',
+                    status: 'offline',
+                    streak: 8,
+                    level: 3,
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                },
+                {
+                    id: 'mock-12',
+                    username: 'olivia_focus',
+                    display_name: 'Olivia Garcia',
+                    avatar_url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=olivia',
+                    status: 'online',
+                    streak: 19,
+                    level: 7,
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                }
+            ];
+
+            const combinedFriends = [...allFriends, ...mockFriends];
+            setFriends(combinedFriends);
+            
+            const mockOnline = mockFriends.filter(f => f.status === 'online');
+            setOnlineFriends([...online, ...mockOnline]);
+            
             setPendingRequests(requests);
+
+            // Load study groups
+            try {
+                const groupsData = await studyGroupsService.getMyGroups();
+                setGroups(groupsData);
+                
+                // Load unread counts for each group
+                const counts: Record<string, number> = {};
+                for (const group of groupsData) {
+                    try {
+                        const count = await messagingService.getUnreadCount(group.id);
+                        counts[group.id] = count;
+                    } catch (error) {
+                        counts[group.id] = 0;
+                    }
+                }
+                setUnreadCounts(counts);
+            } catch (error) {
+                console.error('Error loading groups:', error);
+            }
         } catch (error) {
             console.error('Error loading friends:', error);
         } finally {
@@ -273,207 +441,302 @@ export default function Friends() {
         );
     }
 
+    // Separate DMs from regular groups
+    const directMessages = groups.filter(g => g.max_members === 2);
+    const regularGroups = groups.filter(g => g.max_members !== 2);
+
+    // Sort friends by performance score
+    const rankedFriends = [...friends].sort((a, b) => {
+        const scoreA = (a.streak || 0) * 10 + ((a.level || 1) * 100);
+        const scoreB = (b.streak || 0) * 10 + ((b.level || 1) * 100);
+        return scoreB - scoreA;
+    });
+
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-900 p-6">
-            <div className="max-w-6xl mx-auto space-y-6">
+        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-6">
+            <div className="max-w-[1800px] mx-auto">
                 {/* Header */}
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mb-6">
                     <div>
-                        <h1 className="text-3xl font-black text-pink flex items-center gap-3">
+                        <h1 className="text-3xl font-black text-primary flex items-center gap-3">
                             <Users className="h-8 w-8" />
-                            Friends
+                            SOCIAL HUB
                         </h1>
-                        <p className="text-gray-400 mt-1">
+                        <p className="text-gray-400 mt-1 text-sm">
                             {onlineFriends.length} of {friends.length} friends online
                         </p>
                     </div>
-
-                    {/* Search and Notifications */}
-                    <div className="flex gap-2 items-center">
-                        <NotificationCenter />
-                        <Input
-                            placeholder="Search for users..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                            className="w-64 bg-obsidian border-pink/20"
-                        />
-                        <Button onClick={handleSearch} className="bg-pink hover:bg-pink/80 text-black">
-                            <Search className="h-4 w-4 mr-2" />
-                            Search
-                        </Button>
-                    </div>
                 </div>
 
-                {/* Tabs */}
-                <Tabs defaultValue="requests" className="w-full">
-                    <TabsList className="grid w-full grid-cols-3 bg-obsidian">
-                        <TabsTrigger value="all">
-                            All Friends ({friends.length})
-                        </TabsTrigger>
-                        <TabsTrigger value="online">
-                            Online ({onlineFriends.length})
-                        </TabsTrigger>
-                        <TabsTrigger value="requests">
-                            Requests ({pendingRequests.length})
-                        </TabsTrigger>
-                    </TabsList>
+                {/* Main Layout: 2 Columns */}
+                <div className="flex gap-4 h-[calc(100vh-140px)]">
+                    {/* LEFT COLUMN - Performance + Friends List */}
+                    <div className="w-[25%] flex flex-col gap-4 h-full flex-shrink-0">
+                        {/* Top Performers Section */}
+                        <Card className="bg-gradient-to-br from-yellow-500/10 to-yellow-600/10 border-2 border-yellow-500/30 flex-shrink-0">
+                            <div className="p-3">
+                                <div className="flex items-center justify-between mb-3">
+                                    <div className="flex items-center gap-2">
+                                        <Trophy className="w-5 h-5 text-yellow-500" />
+                                        <h2 className="text-sm font-black uppercase text-yellow-500">
+                                            {showFullRankings ? 'RANKINGS' : 'TOP 3'}
+                                        </h2>
+                                    </div>
+                                    <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        onClick={() => setShowFullRankings(!showFullRankings)}
+                                        className="text-yellow-500 hover:text-yellow-400 font-bold h-6 px-2 text-xs"
+                                    >
+                                        {showFullRankings ? 'Less' : 'All'}
+                                    </Button>
+                                </div>
 
-                    {/* All Friends */}
-                    <TabsContent value="all">
-                        <ScrollArea className="h-[600px]">
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {friends.map((friend) => (
-                                    <Card key={friend.id} className="bg-obsidian border-2 border-pink/20 p-4">
-                                        <div className="flex items-start gap-3">
-                                            <img
-                                                src={friend.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${friend.username}`}
-                                                alt={friend.display_name || friend.username}
-                                                className="h-12 w-12 rounded-full"
-                                            />
-                                            <div className="flex-1">
-                                                <div className="flex items-center gap-2">
-                                                    <h3 className="font-bold text-text">{friend.display_name || friend.username}</h3>
-                                                    {friend.status === 'online' && (
-                                                        <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                                                    )}
+                                <div className="space-y-2">
+                                    {(showFullRankings ? rankedFriends : rankedFriends.slice(0, 3)).map((friend, index) => {
+                                        const score = (friend.streak || 0) * 10 + ((friend.level || 1) * 100);
+                                        const tier = index < 3 ? 'BEST' : index < 8 ? 'MID' : 'GROW';
+
+                                        return (
+                                            <motion.div
+                                                key={friend.id}
+                                                initial={{ opacity: 0, x: -20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: index * 0.03 }}
+                                                className="flex items-center gap-2 p-2 bg-black/40 rounded-lg"
+                                            >
+                                                {/* Rank */}
+                                                <div className={`flex items-center justify-center w-6 h-6 rounded-full font-black text-xs ${
+                                                    index < 3 ? 'bg-gradient-to-br from-yellow-500 to-yellow-600 text-black' : 'bg-slate-700 text-white'
+                                                }`}>
+                                                    {index + 1}
                                                 </div>
-                                                <p className="text-xs text-gray-400">@{friend.username}</p>
 
-                                                <div className="flex items-center gap-1 mt-2 bg-orange-500/10 px-2 py-1 rounded w-fit">
-                                                    <Flame className="h-3 w-3 text-orange-500" />
-                                                    <span className="text-xs font-bold text-orange-500">
-                                                        {friend.streak || 0} day streak
-                                                    </span>
-                                                </div>
-
-                                                <div className="flex gap-1 mt-3">
-                                                    <Button
-                                                        size="sm"
-                                                        onClick={() => handleStartDM(friend.id)}
-                                                        className="h-8 px-3 bg-primary hover:bg-primary/90 text-black font-semibold flex-1"
-                                                    >
-                                                        <MessageCircle className="h-4 w-4 mr-1" />
-                                                        Message
-                                                    </Button>
-                                                    {friend.status === 'online' && (
-                                                        <>
-                                                            <Button
-                                                                size="sm"
-                                                                variant="outline"
-                                                                onClick={() => handleStartCall(friend.id, 'audio')}
-                                                                className="h-8 px-2 border-green-500/20 hover:bg-green-500/10"
-                                                                title="Audio Call"
-                                                            >
-                                                                <Phone className="h-4 w-4 text-green-500" />
-                                                            </Button>
-                                                            <Button
-                                                                size="sm"
-                                                                variant="outline"
-                                                                onClick={() => handleStartCall(friend.id, 'video')}
-                                                                className="h-8 px-2 border-blue-500/20 hover:bg-blue-500/10"
-                                                                title="Video Call"
-                                                            >
-                                                                <Video className="h-4 w-4 text-blue-500" />
-                                                            </Button>
-                                                        </>
-                                                    )}
-                                                    <Button
-                                                        size="sm"
-                                                        variant="ghost"
-                                                        onClick={() => handleSendEncouragement(friend.id, 'fire')}
-                                                        className="h-8 px-2 hover:bg-pink/20"
-                                                        title="Fire"
-                                                    >
-                                                        🔥
-                                                    </Button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Card>
-                                ))}
-                            </div>
-                        </ScrollArea>
-                    </TabsContent>
-
-                    {/* Online Friends */}
-                    <TabsContent value="online">
-                        <ScrollArea className="h-[600px]">
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {onlineFriends.map((friend) => (
-                                    <Card key={friend.id} className="bg-obsidian border-2 border-green-500/20 p-4">
-                                        <div className="flex items-start gap-3">
-                                            <div className="relative">
+                                                {/* Avatar */}
                                                 <img
                                                     src={friend.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${friend.username}`}
                                                     alt={friend.display_name || friend.username}
-                                                    className="h-12 w-12 rounded-full"
+                                                    className="h-8 w-8 rounded-full border border-yellow-500/30"
                                                 />
-                                                <div className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full bg-green-500 border-2 border-obsidian"></div>
-                                            </div>
-                                            <div className="flex-1">
-                                                <h3 className="font-bold text-text">{friend.display_name || friend.username}</h3>
-                                                <p className="text-xs text-green-500">Online now</p>
-                                                <p className="text-xs text-gray-300 mt-1">@{friend.username} • {friend.streak || 0}🔥</p>
-                                            </div>
-                                        </div>
-                                    </Card>
-                                ))}
-                            </div>
-                        </ScrollArea>
-                    </TabsContent>
 
-                    {/* Friend Requests */}
-                    <TabsContent value="requests">
-                        <div className="space-y-4">
-                            {pendingRequests.length === 0 ? (
-                                <Card className="bg-obsidian border-2 border-pink/20 p-8">
-                                    <div className="text-center">
-                                        <Inbox className="h-12 w-12 text-text/20 mx-auto mb-3" />
-                                        <p className="text-text/60">No pending friend requests</p>
-                                    </div>
-                                </Card>
-                            ) : (
-                                pendingRequests.map((request) => (
-                                    <Card key={request.id} className="bg-obsidian border-2 border-pink/20 p-4">
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex items-center gap-3">
-                                                <img
-                                                    src={request.friend?.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${request.friend?.username}`}
-                                                    alt={request.friend?.display_name || request.friend?.username}
-                                                    className="h-12 w-12 rounded-full"
-                                                />
-                                                <div>
-                                                    <h3 className="font-bold text-text">{request.friend?.display_name || request.friend?.username}</h3>
-                                                    <p className="text-xs text-gray-400">
-                                                        Sent {new Date(request.created_at).toLocaleDateString()}
-                                                    </p>
+                                                {/* Info */}
+                                                <div className="flex-1 min-w-0">
+                                                    <div className="flex items-center gap-1">
+                                                        <h3 className="font-bold text-white text-xs truncate">
+                                                            {friend.display_name || friend.username}
+                                                        </h3>
+                                                    </div>
+                                                    <div className="flex items-center gap-2 text-xs text-gray-400">
+                                                        <span className="flex items-center gap-1">
+                                                            <Flame className="w-3 h-3 text-orange-500" />
+                                                            {friend.streak || 0}
+                                                        </span>
+                                                        <span className="text-gray-600">•</span>
+                                                        <span>{tier}</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="flex gap-2">
+
+                                                {/* Score */}
+                                                <div className="text-right">
+                                                    <div className="text-sm font-black text-primary">{score}</div>
+                                                </div>
+                                            </motion.div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </Card>
+
+                        {/* Friends List */}
+                        <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-primary/30 flex-1 overflow-hidden">
+                            <div className="p-3 h-full flex flex-col">
+                                <div className="flex items-center justify-between mb-3">
+                                    <div className="flex items-center gap-2">
+                                        <Users className="w-5 h-5 text-primary" />
+                                        <h2 className="text-sm font-black uppercase text-primary">FRIENDS</h2>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        {pendingRequests.length > 0 && (
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                className="h-6 w-6 p-0 relative"
+                                            >
+                                                <Inbox className="w-4 h-4 text-primary" />
+                                                <span className="absolute -top-1 -right-1 bg-pink text-white text-xs font-black px-1.5 rounded-full min-w-[16px] h-4 flex items-center justify-center">
+                                                    {pendingRequests.length}
+                                                </span>
+                                            </Button>
+                                        )}
+                                        <span className="text-xs font-bold text-gray-400">{friends.length}</span>
+                                    </div>
+                                </div>
+
+                                {/* Search */}
+                                <div className="mb-3">
+                                    <Input
+                                        placeholder="Search..."
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        className="bg-black/40 border-primary/20 text-white text-xs h-8"
+                                    />
+                                </div>
+
+                                {/* Friends List */}
+                                <ScrollArea className="h-[calc(100vh-500px)]">
+                                    <div className="space-y-1">
+                                        {friends.map((friend) => (
+                                            <motion.div
+                                                key={friend.id}
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                whileHover={{ x: 2 }}
+                                                className="flex items-center gap-2 p-2 rounded-lg hover:bg-black/40 transition-all cursor-pointer"
+                                            >
+                                                {/* Avatar with online status */}
+                                                <div className="relative">
+                                                    <img
+                                                        src={friend.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${friend.username}`}
+                                                        alt={friend.display_name || friend.username}
+                                                        className="h-8 w-8 rounded-full border border-primary/30"
+                                                    />
+                                                    {friend.status === 'online' ? (
+                                                        <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-green-500 border-2 border-black" />
+                                                    ) : (
+                                                        <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-gray-600 border-2 border-black" />
+                                                    )}
+                                                </div>
+
+                                                {/* Info */}
+                                                <div className="flex-1 min-w-0">
+                                                    <h3 className="font-bold text-white text-xs truncate">
+                                                        {friend.display_name || friend.username}
+                                                    </h3>
+                                                    <div className="flex items-center gap-2 text-xs">
+                                                        <span className="text-gray-400">Lvl {friend.level || 1}</span>
+                                                        <span className="text-gray-600">•</span>
+                                                        <span className="flex items-center gap-1 text-orange-500">
+                                                            <Flame className="w-3 h-3" />
+                                                            {friend.streak || 0}
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                {/* Message Button */}
                                                 <Button
-                                                    onClick={() => handleAcceptRequest(request.id)}
-                                                    className="bg-green-500 hover:bg-green-600 text-white"
+                                                    size="sm"
+                                                    variant="ghost"
+                                                    onClick={() => handleStartDM(friend.id)}
+                                                    className="h-6 w-6 p-0 hover:bg-pink/20"
                                                 >
-                                                    <Check className="h-4 w-4 mr-1" />
-                                                    Accept
+                                                    <MessageCircle className="h-3 w-3 text-pink" />
                                                 </Button>
-                                                <Button
-                                                    onClick={() => handleRejectRequest(request.id)}
-                                                    variant="outline"
-                                                    className="border-red-500/20 text-red-500 hover:bg-red-500/10"
-                                                >
-                                                    <X className="h-4 w-4 mr-1" />
-                                                    Reject
-                                                </Button>
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                </ScrollArea>
+                            </div>
+                        </Card>
+                    </div>
+
+                    {/* RIGHT COLUMN - Messages/Chats */}
+                    <div className="flex-1">
+                        <Card className="bg-gradient-to-br from-pink/10 to-accent/10 border-2 border-pink/30 h-full">
+                            <div className="p-4 flex flex-col h-full">
+                                <div className="flex items-center justify-between mb-4">
+                                    <div className="flex items-center gap-2">
+                                        <MessageCircle className="w-6 h-6 text-pink" />
+                                        <h2 className="text-xl font-black uppercase text-pink">MESSAGES</h2>
+                                    </div>
+                                    <Button
+                                        onClick={() => setIsCreateModalOpen(true)}
+                                        size="sm"
+                                        className="bg-primary hover:bg-primary/90 text-black font-bold h-8"
+                                    >
+                                        <Plus className="w-4 h-4 mr-2" />
+                                        Create Group
+                                    </Button>
+                                </div>
+
+                                <ScrollArea className="flex-1">
+                                    <div className="space-y-2">
+                                        {/* Direct Messages */}
+                                        {directMessages.length > 0 && (
+                                            <>
+                                                <p className="text-xs font-bold text-gray-400 uppercase mb-2 px-2">Direct Messages</p>
+                                                {directMessages.map((dm) => (
+                                                    <motion.div
+                                                        key={dm.id}
+                                                        whileHover={{ scale: 1.01, x: 4 }}
+                                                        className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all ${
+                                                            selectedGroup?.id === dm.id 
+                                                                ? 'bg-pink/20 border-2 border-pink' 
+                                                                : 'bg-black/40 hover:bg-black/60 border-2 border-transparent'
+                                                        }`}
+                                                        onClick={() => setSelectedGroup(dm)}
+                                                    >
+                                                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink to-accent flex items-center justify-center">
+                                                            <MessageCircle className="w-5 h-5 text-white" />
+                                                        </div>
+                                                        <div className="flex-1 min-w-0">
+                                                            <h3 className="font-bold text-white text-sm truncate">{dm.name}</h3>
+                                                            <p className="text-xs text-gray-400 truncate">Direct Message</p>
+                                                        </div>
+                                                        {unreadCounts[dm.id] > 0 && (
+                                                            <span className="bg-pink text-white text-xs font-black px-2 py-1 rounded-full">
+                                                                {unreadCounts[dm.id]}
+                                                            </span>
+                                                        )}
+                                                    </motion.div>
+                                                ))}
+                                            </>
+                                        )}
+
+                                        {/* Study Groups */}
+                                        {regularGroups.length > 0 && (
+                                            <>
+                                                <p className="text-xs font-bold text-gray-400 uppercase mb-2 mt-4 px-2">Study Groups</p>
+                                                {regularGroups.map((group) => (
+                                                    <motion.div
+                                                        key={group.id}
+                                                        whileHover={{ scale: 1.01, x: 4 }}
+                                                        className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all ${
+                                                            selectedGroup?.id === group.id 
+                                                                ? 'bg-primary/20 border-2 border-primary' 
+                                                                : 'bg-black/40 hover:bg-black/60 border-2 border-transparent'
+                                                        }`}
+                                                        onClick={() => setSelectedGroup(group)}
+                                                    >
+                                                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                                                            <Hash className="w-5 h-5 text-black font-bold" />
+                                                        </div>
+                                                        <div className="flex-1 min-w-0">
+                                                            <h3 className="font-bold text-white text-sm truncate">{group.name}</h3>
+                                                            <p className="text-xs text-gray-400 truncate">{group.subject || 'Study Group'}</p>
+                                                        </div>
+                                                        {unreadCounts[group.id] > 0 && (
+                                                            <span className="bg-primary text-black text-xs font-black px-2 py-1 rounded-full">
+                                                                {unreadCounts[group.id]}
+                                                            </span>
+                                                        )}
+                                                    </motion.div>
+                                                ))}
+                                            </>
+                                        )}
+
+                                        {directMessages.length === 0 && regularGroups.length === 0 && (
+                                            <div className="text-center py-12">
+                                                <MessageCircle className="w-12 h-12 text-gray-600 mx-auto mb-3" />
+                                                <p className="text-gray-400 text-sm">No messages yet</p>
+                                                <p className="text-gray-500 text-xs">Start a conversation with friends</p>
                                             </div>
-                                        </div>
-                                    </Card>
-                                ))
-                            )}
-                        </div>
-                    </TabsContent>
-                </Tabs>
+                                        )}
+                                    </div>
+                                </ScrollArea>
+                            </div>
+                        </Card>
+                    </div>
+                </div>
             </div>
 
             {/* Active Call Interface */}
@@ -504,6 +767,24 @@ export default function Friends() {
                     }}
                 />
             )}
+
+            {/* Group Chat Modal */}
+            {selectedGroup && (
+                <GroupChat
+                    group={selectedGroup}
+                    onClose={() => setSelectedGroup(null)}
+                />
+            )}
+
+            {/* Create Group Modal */}
+            <CreateGroupModal
+                isOpen={isCreateModalOpen}
+                onClose={() => setIsCreateModalOpen(false)}
+                onGroupCreated={async () => {
+                    await loadFriendsData();
+                    setIsCreateModalOpen(false);
+                }}
+            />
         </div>
     );
 }

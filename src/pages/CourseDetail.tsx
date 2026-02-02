@@ -40,7 +40,7 @@ import {
   LayoutGrid,
 } from 'lucide-react';
 import { MOCK_COURSES } from '@/mocks/courses';
-import type { MockCourse, MockModule, MockLesson } from '@/mocks/courses';
+import type { MockCourse, CourseModule as MockModule, CourseLesson as MockLesson } from '@/mocks/courses';
 
 // Helper function to get difficulty badge color
 const getDifficultyColor = (difficulty: string) => {
@@ -77,7 +77,7 @@ export default function CourseDetail() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { playSound } = useSoundPlayer();
-  
+
   const [course, setCourse] = useState<MockCourse | null>(null);
   const [currentLesson, setCurrentLesson] = useState<{ moduleId: string; lessonId: string } | null>(null);
   const [completedLessons, setCompletedLessons] = useState<Set<string>>(new Set());
@@ -99,20 +99,20 @@ export default function CourseDetail() {
 
       // Find course in MOCK_COURSES
       const foundCourse = MOCK_COURSES.find(c => c.id === courseId);
-      
+
       if (!foundCourse) {
         throw new Error('Course not found');
       }
 
       setCourse(foundCourse);
-      
+
       // Load progress from localStorage
       const savedProgress = localStorage.getItem(`course_progress_${courseId}`);
       if (savedProgress) {
         try {
           const progressData = JSON.parse(savedProgress);
           setCompletedLessons(new Set(progressData.completedLessons || []));
-          
+
           // Set current lesson to last incomplete or first lesson
           if (progressData.currentLesson) {
             setCurrentLesson(progressData.currentLesson);
@@ -170,7 +170,7 @@ export default function CourseDetail() {
   // Handle lesson completion
   const handleCompleteLesson = () => {
     if (!currentLesson) return;
-    
+
     const lessonKey = `${currentLesson.moduleId}-${currentLesson.lessonId}`;
     const newCompleted = new Set(completedLessons);
     newCompleted.add(lessonKey);
@@ -203,7 +203,7 @@ export default function CourseDetail() {
     if (!currentModule) return;
 
     const currentLessonIndex = currentModule.lessons.findIndex(l => l.id === currentLesson.lessonId);
-    
+
     // Check if there's a next lesson in current module
     if (currentLessonIndex < currentModule.lessons.length - 1) {
       const nextLesson = currentModule.lessons[currentLessonIndex + 1];
@@ -239,7 +239,7 @@ export default function CourseDetail() {
     if (!currentModule) return;
 
     const currentLessonIndex = currentModule.lessons.findIndex(l => l.id === currentLesson.lessonId);
-    
+
     // Check if there's a previous lesson in current module
     if (currentLessonIndex > 0) {
       const prevLesson = currentModule.lessons[currentLessonIndex - 1];
@@ -333,10 +333,10 @@ export default function CourseDetail() {
       className="min-h-screen bg-background"
     >
       {/* Breadcrumb */}
-      <div className="border-b-4 border-black bg-white">
+      <div className="border-b-4 border-black bg-black">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <button onClick={() => navigate('/dashboard')} className="hover:text-foreground transition-colors">
+          <div className="flex items-center gap-2 text-sm text-[#9FA3AE]">
+            <button onClick={() => navigate('/dashboard')} className="hover:text-[#DAFD78] transition-colors">
               Dashboard
             </button>
             <ChevronRight className="h-4 w-4" />
@@ -350,13 +350,13 @@ export default function CourseDetail() {
       </div>
 
       {/* Hero Header */}
-      <div className="relative border-b-4 border-black bg-gradient-to-br from-[#C9B458]/10 via-[#C27BA0]/10 to-[#6DAEDB]/10 overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <ThreeDFallback fallbackColor="from-[#C9B458]/5 to-[#6DAEDB]/5">
+      <div className="relative border-b-4 border-black bg-black overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <ThreeDFallback fallbackColor="from-black to-slate-900">
             <GridScan />
           </ThreeDFallback>
         </div>
-        
+
         <div className="container mx-auto px-4 py-12 relative z-10">
           <motion.div
             initial={{ y: 20, opacity: 0 }}
@@ -380,13 +380,13 @@ export default function CourseDetail() {
                     <Badge className={`${getDifficultyColor(course.difficulty)} border-2 text-sm px-3 py-1`}>
                       {course.difficulty.toUpperCase()}
                     </Badge>
-                    <Badge className="bg-[#C9B458]/10 text-[#C9B458] border-2 border-[#C9B458]/20 text-sm px-3 py-1">
+                    <Badge className="bg-[#DAFD78]/10 text-[#DAFD78] border-2 border-[#DAFD78]/20 text-sm px-3 py-1">
                       {course.category}
                     </Badge>
                   </div>
 
                   <h1 className="text-4xl md:text-5xl font-bold tracking-tight">{course.title}</h1>
-                  
+
                   <p className="text-lg text-muted-foreground max-w-3xl">{course.description}</p>
 
                   {/* Course Meta */}
@@ -426,13 +426,13 @@ export default function CourseDetail() {
                 <div className="flex gap-4 flex-wrap">
                   <Button
                     size="lg"
-                    className="bg-[#C9B458] hover:bg-[#B8A347] text-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
+                    className="bg-[#DAFD78] hover:bg-[#DAFD78]/90 text-black border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all font-black"
                     onClick={() => setActiveTab('curriculum')}
                   >
                     <PlayCircle className="mr-2 h-5 w-5" />
                     {progressPercentage > 0 ? 'Continue Learning' : 'Start Course'}
                   </Button>
-                  
+
                   <Button
                     size="lg"
                     variant="outline"
@@ -457,7 +457,7 @@ export default function CourseDetail() {
 
               {/* Right: Progress Card */}
               <div className="lg:col-span-1">
-                <Card className="border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white">
+                <Card className="border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-zinc-950">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Target className="h-5 w-5 text-[#C9B458]" />
@@ -476,7 +476,7 @@ export default function CourseDetail() {
                           initial={{ width: 0 }}
                           animate={{ width: `${progressPercentage}%` }}
                           transition={{ duration: 1, ease: "easeOut" }}
-                          className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#C9B458] to-[#C27BA0]"
+                          className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#DAFD78] to-[#BF5AF2]"
                         />
                       </div>
                     </div>
@@ -527,20 +527,20 @@ export default function CourseDetail() {
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 border-4 border-black p-1 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-            <TabsTrigger value="overview" className="data-[state=active]:bg-[#C9B458] data-[state=active]:text-white">
+          <TabsList className="grid w-full grid-cols-4 border-4 border-black p-1 bg-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <TabsTrigger value="overview" className="data-[state=active]:bg-[#DAFD78] data-[state=active]:text-black font-bold">
               <Sparkles className="mr-2 h-4 w-4" />
               Overview
             </TabsTrigger>
-            <TabsTrigger value="curriculum" className="data-[state=active]:bg-[#C9B458] data-[state=active]:text-white">
+            <TabsTrigger value="curriculum" className="data-[state=active]:bg-[#DAFD78] data-[state=active]:text-black font-bold">
               <BookOpen className="mr-2 h-4 w-4" />
               Curriculum
             </TabsTrigger>
-            <TabsTrigger value="resources" className="data-[state=active]:bg-[#C9B458] data-[state=active]:text-white">
+            <TabsTrigger value="resources" className="data-[state=active]:bg-[#DAFD78] data-[state=active]:text-black font-bold">
               <Download className="mr-2 h-4 w-4" />
               Resources
             </TabsTrigger>
-            <TabsTrigger value="reviews" className="data-[state=active]:bg-[#C9B458] data-[state=active]:text-white">
+            <TabsTrigger value="reviews" className="data-[state=active]:bg-[#DAFD78] data-[state=active]:text-black font-bold">
               <Star className="mr-2 h-4 w-4" />
               Reviews
             </TabsTrigger>
@@ -568,7 +568,7 @@ export default function CourseDetail() {
                           transition={{ delay: index * 0.1 }}
                           className="flex items-start gap-3"
                         >
-                          <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                          <CheckCircle2 className="h-5 w-5 text-[#DAFD78] mt-0.5 flex-shrink-0" />
                           <span>{skill}</span>
                         </motion.div>
                       ))}
@@ -584,7 +584,7 @@ export default function CourseDetail() {
                   <CardContent className="prose max-w-none">
                     <p className="text-muted-foreground leading-relaxed">{course.description}</p>
                     <p className="mt-4 text-muted-foreground leading-relaxed">
-                      This comprehensive course is designed to take you from beginner to advanced level. 
+                      This comprehensive course is designed to take you from beginner to advanced level.
                       You'll learn through hands-on projects, real-world examples, and interactive exercises.
                       By the end of this course, you'll have the skills and confidence to build your own projects.
                     </p>
@@ -690,7 +690,7 @@ export default function CourseDetail() {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
               {/* Module Sidebar */}
               <div className="lg:col-span-1">
-                <Card className="border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] sticky top-4">
+                <Card className="border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] sticky top-4 bg-zinc-950">
                   <CardHeader>
                     <CardTitle className="text-lg">Modules</CardTitle>
                     <CardDescription>{course.modules.length} modules • {totalLessons} lessons</CardDescription>
@@ -698,7 +698,7 @@ export default function CourseDetail() {
                   <CardContent className="p-0">
                     <Accordion type="single" collapsible className="w-full">
                       {course.modules.map((module, moduleIndex) => {
-                        const moduleProgress = module.lessons.filter(l => 
+                        const moduleProgress = module.lessons.filter(l =>
                           isLessonCompleted(module.id, l.id)
                         ).length;
                         const modulePercentage = (moduleProgress / module.lessons.length) * 100;
@@ -709,9 +709,9 @@ export default function CourseDetail() {
                               <div className="flex items-start gap-3 text-left flex-1">
                                 <div className="mt-1">
                                   {moduleProgress === module.lessons.length ? (
-                                    <CheckCircle2 className="h-5 w-5 text-green-500" />
+                                    <CheckCircle2 className="h-5 w-5 text-[#DAFD78]" />
                                   ) : moduleProgress > 0 ? (
-                                    <div className="h-5 w-5 rounded-full border-2 border-[#C9B458] bg-[#C9B458]/20" />
+                                    <div className="h-5 w-5 rounded-full border-2 border-[#DAFD78] bg-[#DAFD78]/20" />
                                   ) : (
                                     <div className="h-5 w-5 rounded-full border-2 border-muted-foreground" />
                                   )}
@@ -737,18 +737,17 @@ export default function CourseDetail() {
                               <div className="space-y-1 pl-8">
                                 {module.lessons.map((lesson) => {
                                   const isCompleted = isLessonCompleted(module.id, lesson.id);
-                                  const isCurrent = currentLesson?.moduleId === module.id && 
-                                                   currentLesson?.lessonId === lesson.id;
+                                  const isCurrent = currentLesson?.moduleId === module.id &&
+                                    currentLesson?.lessonId === lesson.id;
 
                                   return (
                                     <button
                                       key={lesson.id}
                                       onClick={() => setCurrentLesson({ moduleId: module.id, lessonId: lesson.id })}
-                                      className={`w-full text-left p-2 rounded-lg border-2 transition-all ${
-                                        isCurrent
-                                          ? 'border-[#C9B458] bg-[#C9B458]/10'
-                                          : 'border-transparent hover:border-black hover:bg-accent'
-                                      }`}
+                                      className={`w-full text-left p-2 rounded-lg border-2 transition-all ${isCurrent
+                                        ? 'border-[#DAFD78] bg-[#DAFD78]/10'
+                                        : 'border-transparent hover:border-black hover:bg-slate-900'
+                                        }`}
                                     >
                                       <div className="flex items-center gap-2">
                                         {isCompleted ? (
@@ -784,7 +783,7 @@ export default function CourseDetail() {
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <Card className="border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                      <Card className="border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-zinc-950">
                         <CardHeader className="border-b-4 border-black">
                           <div className="space-y-3">
                             <div className="flex items-center gap-2 flex-wrap">
@@ -826,7 +825,7 @@ export default function CourseDetail() {
                                   </div>
                                 );
                               }
-                              
+
                               // Check if it's a heading
                               if (paragraph.startsWith('## ')) {
                                 return (
@@ -835,7 +834,7 @@ export default function CourseDetail() {
                                   </h2>
                                 );
                               }
-                              
+
                               if (paragraph.startsWith('### ')) {
                                 return (
                                   <h3 key={index} className="text-xl font-bold mt-6 mb-3">

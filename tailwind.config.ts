@@ -18,131 +18,46 @@ export default {
         'body': ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
-        // MODERN DARK THEME - New Color Palette
+        // UNIFIED BRAND THEME - Corrected (Lime & Purple)
         neon: {
-          DEFAULT: '#DAFD78', // Primary neon lime
-          50: '#F8FEE8',
-          100: '#F1FDD1',
-          200: '#E8FBA8',
-          300: '#DAFD78', // Main accent
-          400: '#C5E866',
-          500: '#A8C94D',
-          600: '#8AAA34',
-          700: '#6D8B1B',
-          800: '#4F6C02',
-          900: '#324D00',
+          DEFAULT: '#DAFD78',
+          300: '#DAFD78',
         },
         cosmic: {
-          DEFAULT: '#0C0E17', // Main dark background
-          50: '#E8E9EC',
-          100: '#D1D3D9',
-          200: '#A3A7B3',
-          300: '#757B8D',
-          400: '#474F67',
-          500: '#171B21', // Primary panels
-          600: '#0C0E17', // Main bg
-          700: '#080A10',
-          800: '#04050A',
-          900: '#020205',
+          DEFAULT: '#000000',
+          500: '#171923',
+          600: '#000000',
         },
         purple: {
-          DEFAULT: '#6C5BA6', // Purple accent
-          50: '#F0EDF7',
-          100: '#E1DBEF',
-          200: '#C3B7DF',
-          300: '#A593CF',
-          400: '#876FBF',
-          500: '#6C5BA6',
-          600: '#574A86',
-          700: '#423866',
-          800: '#2D2746',
-          900: '#181526',
+          DEFAULT: '#6C5BA6',
+          dark: '#423866',
         },
-        // Legacy colors mapped to new theme
         gold: {
           DEFAULT: '#DAFD78',
-          50: '#F8FEE8',
-          100: '#F1FDD1',
-          200: '#E8FBA8',
-          300: '#DAFD78',
-          400: '#C5E866',
-          500: '#A8C94D',
-          600: '#8AAA34',
-          700: '#6D8B1B',
-          800: '#4F6C02',
-          900: '#324D00',
         },
         pink: {
           DEFAULT: '#6C5BA6',
-          50: '#F0EDF7',
-          100: '#E1DBEF',
-          200: '#C3B7DF',
-          300: '#A593CF',
-          400: '#876FBF',
-          500: '#6C5BA6',
-          600: '#574A86',
-          700: '#423866',
-          800: '#2D2746',
-          900: '#181526',
         },
-        blue: {
-          DEFAULT: '#58A6FF',
-          50: '#E8F4FF',
-          100: '#D1E9FF',
-          200: '#A3D3FF',
-          300: '#8EC8FF', // Brightened for better readability
-          400: '#58A6FF',
-          500: '#5BA8FF', // Brightened
-          600: '#4A9AFF', // Brightened
-          700: '#3B8BFF', // Brightened
-          800: '#2C7CFF', // Brightened
-          900: '#1D6DEE', // Brightened
-        },
-        obsidian: {
-          DEFAULT: '#1F2229',
-          light: '#25272E',
-          dark: '#171B21',
-        },
-        deepblack: '#0C0E17', // Main background
-        border: '#31343B',
-        input: '#1F2229',
-        ring: '#DAFD78',
-        background: '#0C0E17',
+        deepblack: '#000000',
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: '#000000',
         foreground: '#FFFFFF',
         primary: {
           DEFAULT: '#DAFD78',
-          foreground: '#0C0E17',
+          foreground: '#000000',
         },
         secondary: {
           DEFAULT: '#6C5BA6',
           foreground: '#FFFFFF',
         },
-        destructive: {
-          DEFAULT: '#F85149',
+        card: {
+          DEFAULT: '#171923',
           foreground: '#FFFFFF',
-        },
-        muted: {
-          DEFAULT: '#25272E',
-          foreground: '#C8CCDA', // Brighter for better readability
-        },
-        accent: {
-          DEFAULT: '#31343B',
-          foreground: '#FFFFFF',
-        },
-        success: {
-          DEFAULT: '#3FB950',
-          foreground: '#FFFFFF',
-        },
-        warning: {
-          DEFAULT: '#D29922',
-          foreground: '#0C0E17',
         },
         popover: {
-          DEFAULT: '#1F2229',
-          foreground: '#FFFFFF',
-        },
-        card: {
-          DEFAULT: '#171B21',
+          DEFAULT: '#171923',
           foreground: '#FFFFFF',
         },
       },

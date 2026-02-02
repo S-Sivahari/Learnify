@@ -243,12 +243,12 @@ export default function AIBot() {
   };
 
   return (
-    <div className="relative min-h-screen bg-white dark:bg-slate-800">
+    <div className="relative min-h-screen bg-black">
       <div className="container mx-auto h-[calc(100vh-6rem)] px-4 py-6">
         <div className="grid h-full gap-6 lg:grid-cols-[1fr_300px]">
           {/* Chat Area */}
-          <Card className="flex flex-col border-4 border-black shadow-pink-brutal bg-white dark:bg-slate-800">
-            <div className="flex items-center justify-between border-b border-purple/30 p-4 bg-white dark:bg-slate-800">
+          <Card className="flex flex-col border border-slate-800 bg-black shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-800 p-4 bg-black/50 backdrop-blur-md">
               <div className="flex items-center gap-2">
                 <Sparkles className="h-6 w-6 text-accent" />
                 <h1 className="text-2xl font-black uppercase text-primary"><TranslatedText text="AI Study Assistant" /></h1>
@@ -277,16 +277,16 @@ export default function AIBot() {
                     </Button>
                   </>
                 )}
-                <Button variant="ghost" size="icon" title="Translate" className="text-primary hover:bg-primary/20">
+                <Button variant="ghost" size="icon" title="Translate" className="text-[#DAFD78] hover:bg-[#DAFD78]/10">
                   <Languages className="h-5 w-5" />
                 </Button>
-                <Button variant="ghost" size="icon" title="Read aloud" className="text-accent hover:bg-accent/20">
+                <Button variant="ghost" size="icon" title="Read aloud" className="text-[#DAFD78] hover:bg-[#DAFD78]/10">
                   <Volume2 className="h-5 w-5" />
                 </Button>
               </div>
             </div>
 
-            <ScrollArea className="flex-1 p-4 bg-white dark:bg-slate-800">
+            <ScrollArea className="flex-1 p-4 bg-black">
               <div className="space-y-4">
                 {mode === 'verified' && <VerificationBanner course={MOCK_COURSE_INFO} mode={mode} />}
 
@@ -309,11 +309,11 @@ export default function AIBot() {
                           className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                         >
                           <div
-                            className={`max-w-[80%] rounded-lg px-6 py-4 ${message.role === 'user'
-                              ? 'bg-primary text-black border border-neon/30 shadow-primary font-bold'
+                            className={`max-w-[80%] rounded-xl px-6 py-4 shadow-xl ${message.role === 'user'
+                              ? 'bg-[#DAFD78] text-black font-bold'
                               : isVerified
-                                ? 'bg-white dark:bg-slate-800 text-white border-4 border-green-500 shadow-[4px_4px_0px_0px_rgba(34,197,94,1)] font-bold'
-                                : 'bg-accent text-white border border-neon/30 shadow-pink-heavy font-bold'
+                                ? 'bg-black text-white border-2 border-green-500 font-bold'
+                                : 'bg-slate-800/80 text-white border border-[#DAFD78]/20 font-bold'
                               }`}
                           >
                             {message.role === 'user' ? (
@@ -337,7 +337,7 @@ export default function AIBot() {
                                     h2: ({ children }) => <h2 className="text-lg font-black mb-2 text-primary">{children}</h2>,
                                     h3: ({ children }) => <h3 className="text-base font-bold mb-1 text-primary">{children}</h3>,
                                     strong: ({ children }) => <strong className="font-black text-primary">{children}</strong>,
-                                    a: ({ href, children }) => <a href={href} className="text-blue underline" target="_blank" rel="noopener noreferrer">{children}</a>,
+                                    a: ({ href, children }) => <a href={href} className="text-[#DAFD78] underline" target="_blank" rel="noopener noreferrer">{children}</a>,
                                   }}
                                 >
                                   {message.content}
@@ -366,7 +366,7 @@ export default function AIBot() {
               </div>
             </ScrollArea>
 
-            <div className="border-t border-neon/30 p-4 bg-white dark:bg-slate-800">
+            <div className="border-t border-slate-800 p-4 bg-black">
               <div className="flex gap-2">
                 <Input
                   placeholder={placeholderText}
@@ -374,7 +374,7 @@ export default function AIBot() {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && !isLoading && handleSend()}
                   disabled={isLoading}
-                  className="border border-neon/30 font-bold text-white placeholder:text-white/50 bg-black/50 focus-visible:ring-neon focus-visible:ring-2"
+                  className="border border-slate-700 font-bold text-white placeholder:text-gray-600 bg-slate-900 focus-visible:ring-[#DAFD78] focus-visible:ring-1"
                 />
                 <Button
                   size="icon"
@@ -389,7 +389,7 @@ export default function AIBot() {
                   size="icon"
                   onClick={handleSend}
                   disabled={isLoading || !input.trim()}
-                  className="border border-purple bg-accent text-white hover:bg-accent/80 shadow-pink-heavy font-black"
+                  className="bg-[#DAFD78] text-black hover:bg-[#DAFD78]/90 shadow-lg font-black"
                 >
                   {isLoading ? (
                     <Loader2 className="h-5 w-5 animate-spin" />
@@ -404,9 +404,9 @@ export default function AIBot() {
           {/* Suggestions Sidebar */}
           <div className="hidden lg:block space-y-4">
             {/* Recent Conversations */}
-            <SpotlightCard spotlightColor="rgba(255, 20, 147, 0.3)">
-              <Card className="p-6 border border-purple shadow-pink-brutal bg-white dark:bg-slate-800">
-                <h3 className="mb-4 text-xl font-black uppercase text-accent flex items-center gap-2">
+            <SpotlightCard spotlightColor="rgba(218, 253, 120, 0.1)">
+              <Card className="p-6 border border-slate-800 bg-black shadow-2xl">
+                <h3 className="mb-4 text-xl font-black uppercase text-[#DAFD78] flex items-center gap-2">
                   <MessageSquare className="h-5 w-5" />
                   <TranslatedText text="History" />
                 </h3>
@@ -414,9 +414,9 @@ export default function AIBot() {
                   {MOCK_CONVERSATIONS.map((conv) => (
                     <div
                       key={conv.id}
-                      className="p-2 border border-purple/30 rounded bg-black/30 hover:bg-accent/10 cursor-pointer transition-colors"
+                      className="p-2 border border-slate-800 rounded bg-slate-900 hover:bg-slate-800 cursor-pointer transition-colors"
                     >
-                      <p className="text-xs font-bold text-accent truncate">{conv.title}</p>
+                      <p className="text-xs font-bold text-gray-300 truncate">{conv.title}</p>
                       <div className="flex items-center gap-1 mt-1 text-xs text-white/60">
                         <Clock className="h-3 w-3" />
                         <span>{new Date(conv.createdAt).toLocaleDateString()}</span>

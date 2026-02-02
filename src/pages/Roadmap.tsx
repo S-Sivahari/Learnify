@@ -290,16 +290,16 @@ export default function Roadmap() {
       className="min-h-screen bg-background"
     >
       {/* Hero Header */}
-      <div className="relative border-b-4 border-black bg-gradient-to-br from-[#C9B458]/10 via-[#C27BA0]/10 to-[#6DAEDB]/10 overflow-hidden">
+      <div className="relative border-b-4 border-black bg-black overflow-hidden">
         {/* Cosmic Background */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0D1117] via-[#161B22] to-[#0D1117]" />
-          <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-primary/5 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-black" />
+          <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#DAFD78]/5 via-transparent to-transparent" />
           {/* Subtle grid pattern */}
           <div className="absolute inset-0 opacity-5" style={{
-            backgroundImage: `linear-gradient(rgba(190, 255, 0, 0.1) 1px, transparent 1px),
-                             linear-gradient(90deg, rgba(190, 255, 0, 0.1) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
+            backgroundImage: `linear-gradient(rgba(218, 253, 120, 0.1) 1px, transparent 1px),
+                             linear-gradient(90deg, rgba(218, 253, 120, 0.1) 1px, transparent 1px)`,
+            backgroundSize: '100px 100px'
           }} />
         </div>
 
@@ -428,8 +428,8 @@ export default function Roadmap() {
                     transition={{ delay: index * 0.1 }}
                   >
                     <Card className={`border-4 border-black transition-all ${isSelected
-                      ? 'shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-gradient-to-br from-[#C9B458]/5 to-[#C27BA0]/5'
-                      : 'shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]'
+                      ? 'shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-slate-900/50'
+                      : 'shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] bg-zinc-950'
                       }`}>
                       <CardHeader>
                         <div className="flex items-start gap-3">
@@ -711,12 +711,12 @@ export default function Roadmap() {
                               onClick={() => !isLocked && handleMilestoneClick(milestone)}
                               disabled={isLocked}
                               className={`w-full text-left p-6 rounded-lg border-4 border-black transition-all ${isLocked
-                                ? 'bg-muted opacity-60 cursor-not-allowed'
+                                ? 'bg-slate-900 opacity-60 cursor-not-allowed'
                                 : isNext
-                                  ? 'bg-gradient-to-br from-primary/10 to-accent/10 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
+                                  ? 'bg-gradient-to-br from-[#DAFD78]/10 to-transparent hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
                                   : isCompleted
                                     ? 'bg-green-500/5 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
-                                    : 'bg-white hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
+                                    : 'bg-zinc-950 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
                                 }`}
                             >
                               <div className="space-y-3">

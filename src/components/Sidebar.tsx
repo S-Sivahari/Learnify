@@ -41,10 +41,7 @@ const menuItems: MenuItem[] = [
   { path: '/roadmap', label: 'Roadmap', icon: Map },
   { path: '/notes', label: 'Notes', icon: StickyNote },
   { path: '/study-planner', label: 'Calendar', icon: Calendar },
-  { path: '/study-groups', label: 'Study Groups', icon: MessageCircle },
-  { path: '/browser', label: 'Browser', icon: Globe },
   { path: '/focus-room', label: 'Focus Room', icon: Clock },
-  { path: '/performance-tiers', label: 'Performance', icon: Trophy },
   { path: '/opportunities', label: 'Opportunities', icon: Target },
   { path: '/sign-language', label: 'Sign Language', icon: Hand },
   { path: '/game-hub', label: 'Game Center', icon: Gamepad2 },
@@ -72,7 +69,7 @@ export default function Sidebar({ className }: SidebarProps) {
   return (
     <aside
       className={cn(
-        "fixed left-0 top-0 h-screen z-50 flex flex-col bg-card border-r border-border transition-all duration-300",
+        "fixed left-0 top-0 h-screen z-50 flex flex-col bg-black border-r border-slate-800 transition-all duration-300",
         isCollapsed ? "w-16" : "w-64",
         className
       )}
@@ -80,13 +77,13 @@ export default function Sidebar({ className }: SidebarProps) {
     >
       {/* Logo */}
       <div className={cn(
-        "flex items-center gap-2 p-4 border-b border-border",
+        "flex items-center gap-2 p-4 border-b border-slate-800",
         isCollapsed ? "justify-center" : "justify-start"
       )}>
-        <Rocket className="h-6 w-6 text-primary flex-shrink-0" />
+        <Rocket className="h-6 w-6 text-[#DAFD78] flex-shrink-0" />
         {!isCollapsed && (
           <Link to="/dashboard" className="font-display font-bold text-sm">
-            <span className="text-primary">Learn</span><span className="text-secondary">ify</span>
+            <span className="text-[#DAFD78]">Learn</span><span className="text-[#6C5BA6]">ify</span>
           </Link>
         )}
       </div>
@@ -109,14 +106,14 @@ export default function Sidebar({ className }: SidebarProps) {
                 className={cn(
                   "flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group",
                   isActive
-                    ? "bg-primary text-primary-foreground font-semibold shadow-primary"
-                    : "text-muted-foreground hover:bg-muted hover:text-primary"
+                    ? "bg-slate-800/50 text-[#DAFD78] font-semibold border border-[#DAFD78]/20 shadow-md"
+                    : "text-gray-400 hover:bg-slate-800/30 hover:text-white"
                 )}
                 title={isCollapsed ? item.label : undefined}
               >
                 <Icon className={cn(
                   "w-5 h-5 flex-shrink-0 transition-transform group-hover:scale-110",
-                  isActive ? "text-primary-foreground" : ""
+                  isActive ? "text-[#6C5BA6]" : "text-gray-500"
                 )} />
                 {!isCollapsed && (
                   <span className="text-sm truncate">{item.label}</span>

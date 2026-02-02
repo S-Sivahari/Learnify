@@ -151,24 +151,24 @@ export default function DashboardGold() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#0C0E17] text-white overflow-auto">
+    <div className="relative min-h-screen bg-black text-white overflow-auto">
       {showOnboarding && <OnboardingTour onComplete={handleOnboardingComplete} />}
 
       {/* Cosmic Background */}
       <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0C0E17] via-[#171B21] to-[#0C0E17]" />
+        <div className="absolute inset-0 bg-black" />
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#DAFD78]/5 via-transparent to-transparent" />
         {/* Subtle grid pattern */}
         <div className="absolute inset-0 opacity-5" style={{
           backgroundImage: `linear-gradient(rgba(218, 253, 120, 0.1) 1px, transparent 1px),
                            linear-gradient(90deg, rgba(218, 253, 120, 0.1) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
+          backgroundSize: '100px 100px'
         }} />
       </div>
 
       <div className="relative z-10 flex flex-col min-h-screen">
         {/* HEADER ROW */}
-        <div className="border-b border-[#31343B]/50 bg-[#171B21]/90 backdrop-blur-xl px-6 py-4 space-y-4">
+        <div className="border-b border-slate-800 bg-black/80 backdrop-blur-xl px-6 py-4 space-y-4">
           <div className="flex items-center justify-between">
             {/* Left: Welcome */}
             <div>
@@ -182,7 +182,7 @@ export default function DashboardGold() {
             <div className="flex items-center gap-6">
               {/* Stats Row */}
               <div className="flex items-center gap-5">
-                <div className="text-center px-3 py-1.5 bg-[#1F2229] rounded-lg border border-[#31343B]/50">
+                <div className="text-center px-3 py-1.5 bg-slate-900 rounded-lg border border-slate-800">
                   <p className="text-lg font-bold text-white">{workspaces.length}</p>
                   <p className="text-[10px] text-[#9FA3AE] uppercase tracking-wide">Spaces</p>
                 </div>
@@ -204,12 +204,12 @@ export default function DashboardGold() {
               </div>
 
               {/* Action Icons - Grouped on right side */}
-              <div className="flex items-center gap-1 bg-[#1F2229] rounded-xl p-1 border border-[#31343B]/50">
+              <div className="flex items-center gap-1 bg-slate-950 rounded-xl p-1 border border-slate-800">
                 {/* Notifications */}
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="relative hover:bg-[#25272E] rounded-lg h-9 w-9"
+                  className="relative hover:bg-slate-900 rounded-lg h-9 w-9"
                   onClick={() => { }}
                   title="Notifications"
                 >
@@ -220,12 +220,12 @@ export default function DashboardGold() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="hover:bg-[#25272E] rounded-lg h-9 w-9"
+                  className="hover:bg-slate-900 rounded-lg h-9 w-9"
                   onClick={() => navigate('/profile')}
                   title="Profile"
                 >
                   <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#DAFD78] to-[#6C5BA6] flex items-center justify-center">
-                    <User className="w-3 h-3 text-[#0C0E17]" />
+                    <User className="w-3 h-3 text-black" />
                   </div>
                 </Button>
               </div>
@@ -246,7 +246,7 @@ export default function DashboardGold() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 min-h-0">
 
             {/* Grid 1: Resume Learning */}
-            <Card className="border border-[#31343B]/50 bg-[#171B21] backdrop-blur-sm rounded-2xl">
+            <Card className="border border-slate-800 bg-slate-900/40 backdrop-blur-sm rounded-2xl">
               <CardHeader className="pb-3 pt-5 px-5">
                 <CardTitle className="text-base font-bold text-[#DAFD78] flex items-center gap-2">
                   <Play className="w-5 h-5" />
@@ -275,7 +275,7 @@ export default function DashboardGold() {
                   <Button
                     onClick={() => navigate('/study-planner')}
                     variant="outline"
-                    className="border-[#31343B] bg-[#1F2229] text-white hover:bg-[#25272E] h-9 text-xs font-semibold"
+                    className="border-slate-800 bg-slate-900/50 text-white hover:bg-slate-800 h-9 text-xs font-semibold"
                   >
                     <Calendar className="w-3.5 h-3.5 mr-1.5" />
                     Calendar
@@ -283,7 +283,7 @@ export default function DashboardGold() {
                   <Button
                     onClick={() => navigate('/ai-bot')}
                     variant="outline"
-                    className="border-[#31343B] bg-[#1F2229] text-white hover:bg-[#25272E] h-9 text-xs font-semibold"
+                    className="border-slate-800 bg-slate-900/50 text-white hover:bg-slate-800 h-9 text-xs font-semibold"
                   >
                     <Brain className="w-3.5 h-3.5 mr-1.5" />
                     AI Chat
@@ -319,7 +319,7 @@ export default function DashboardGold() {
                     <p className="text-xs text-[#9FA3AE]">Last opened: {lastWorkspaceTime}</p>
                     <Button
                       onClick={() => handleOpenWorkspace(workspaces.find(w => w.id === activeWorkspace)?.type || 'frontend')}
-                      className="w-full bg-[#DAFD78] hover:bg-[#DAFD78]/90 text-[#0C0E17] font-bold text-sm h-10 shadow-glow-primary"
+                      className="w-full bg-[#DAFD78] hover:bg-[#DAFD78]/90 text-black font-bold text-sm h-10 shadow-[0_0_20px_rgba(218,253,120,0.15)]"
                     >
                       <Play className="w-4 h-4 mr-2" /> Continue Learning
                     </Button>
@@ -397,7 +397,7 @@ export default function DashboardGold() {
             {/* Grid 3: Tasks */}
             <Card className="border border-[#31343B]/50 bg-[#171B21] backdrop-blur-sm rounded-2xl">
               <CardHeader className="pb-3 pt-5 px-5">
-                <CardTitle className="text-base font-bold text-[#6C5BA6] flex items-center gap-2">
+                <CardTitle className="text-base font-bold text-[#DAFD78] flex items-center gap-2">
                   <GraduationCap className="w-5 h-5" />
                   Tasks
                 </CardTitle>
@@ -418,7 +418,7 @@ export default function DashboardGold() {
                 ))}
                 <Button
                   variant="ghost"
-                  className="w-full text-sm text-[#6C5BA6] hover:text-[#6C5BA6] hover:bg-[#6C5BA6]/20 font-semibold h-9"
+                  className="w-full text-sm text-[#DAFD78] hover:text-[#DAFD78] hover:bg-[#DAFD78]/20 font-semibold h-9"
                   onClick={() => navigate('/study-planner')}
                 >
                   View All <ArrowRight className="w-4 h-4 ml-2" />
@@ -547,7 +547,7 @@ export default function DashboardGold() {
             {/* Grid 9: Daily Habits */}
             <Card className="border border-[#31343B]/50 bg-[#171B21] backdrop-blur-sm rounded-2xl lg:col-span-2">
               <CardHeader className="pb-3 pt-5 px-5">
-                <CardTitle className="text-base font-bold text-[#6C5BA6] flex items-center gap-2">
+                <CardTitle className="text-base font-bold text-[#DAFD78] flex items-center gap-2">
                   <Target className="w-5 h-5" />
                   Daily Habits
                 </CardTitle>

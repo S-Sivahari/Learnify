@@ -14,22 +14,22 @@ export default function NavbarGold() {
   };
 
   return (
-    <nav className="sticky top-0 z-30 border-b border-slate-200 dark:border-slate-700/50 bg-slate-50 dark:bg-slate-900/95 backdrop-blur-xl">
+    <nav className="sticky top-0 z-30 border-b border-slate-800 bg-black/90 backdrop-blur-xl">
       <div className="w-full px-6 py-3">
         <div className="flex items-center justify-between">
           {/* LOGO */}
           <Link to="/dashboard" className="flex items-center gap-3 text-3xl font-display font-black tracking-wide transform hover:scale-105 transition-transform">
-            <Rocket className="h-8 w-8 text-primary" />
-            <span><span className="text-primary">Learn</span><span className="text-accent">ify</span></span>
+            <Rocket className="h-8 w-8 text-[#DAFD78]" />
+            <span><span className="text-[#DAFD78]">Learn</span><span className="text-[#6C5BA6]">ify</span></span>
           </Link>
 
           {/* AUTH BUTTONS */}
           <div className="flex items-center gap-3">
             {/* XP Display */}
             {isAuthenticated && user && (
-              <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-[#DAFD78]/30 rounded-lg">
-                <Zap className="w-4 h-4 text-primary" />
-                <span className="text-primary font-semibold text-sm">{user.xp || 0} XP</span>
+              <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-slate-800 border border-[#DAFD78]/30 rounded-lg">
+                <Zap className="w-4 h-4 text-[#DAFD78]" />
+                <span className="text-[#DAFD78] font-semibold text-sm">{user.xp || 0} XP</span>
               </div>
             )}
 
@@ -39,7 +39,7 @@ export default function NavbarGold() {
             {isAuthenticated ? (
               <>
                 {user && (
-                  <div className="hidden md:block text-[#E6E7E9] font-medium text-sm px-3 py-1.5 bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-lg">
+                  <div className="hidden md:block text-[#DAFD78] font-bold text-sm px-4 py-2 bg-slate-800 border border-[#DAFD78]/20 rounded-lg">
                     {user.name}
                   </div>
                 )}
@@ -47,17 +47,17 @@ export default function NavbarGold() {
                   onClick={handleSignOut}
                   variant="destructive"
                   size="sm"
-                  className="rounded-lg"
+                  className="rounded-lg font-bold"
                 >
                   Sign Out
                 </Button>
               </>
             ) : (
               <>
-                <Button variant="outline" size="sm" asChild className="border-slate-200 dark:border-slate-700 text-white hover:bg-slate-100 dark:bg-slate-700 rounded-lg">
+                <Button variant="outline" size="sm" asChild className="border-slate-700 text-white hover:bg-slate-800 rounded-lg">
                   <Link to="/login">Login</Link>
                 </Button>
-                <Button size="sm" asChild className="bg-primary hover:bg-primary/90 text-[#0C0E17] rounded-lg">
+                <Button size="sm" asChild className="bg-[#DAFD78] hover:bg-[#DAFD78]/90 text-black font-bold rounded-lg">
                   <Link to="/register">Get Started</Link>
                 </Button>
               </>

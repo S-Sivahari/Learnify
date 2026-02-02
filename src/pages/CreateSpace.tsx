@@ -25,8 +25,15 @@ import {
   Target,
   TrendingUp,
   Calendar,
-  User,
+  Wrench,
   LayoutGrid,
+  Code,
+  StickyNote,
+  Youtube,
+  GraduationCap,
+  FileText,
+  PenTool,
+  Terminal,
 } from 'lucide-react';
 import type { SpaceLevel } from '@/types/unifiedOS';
 
@@ -36,8 +43,7 @@ interface CreateSpaceForm {
   learning_goal: string;
   level: SpaceLevel;
   duration_weeks: number;
-  instructor_type: 'ai' | 'human';
-  instructor_id?: string;
+  selected_tools: string[];
 }
 
 const STEPS = [
@@ -46,7 +52,19 @@ const STEPS = [
   { id: 3, name: 'Goal', icon: Target },
   { id: 4, name: 'Level', icon: TrendingUp },
   { id: 5, name: 'Duration', icon: Calendar },
-  { id: 6, name: 'Instructor', icon: User },
+  { id: 6, name: 'Tools', icon: Wrench },
+];
+
+// Available tools for workspace (reduced from 16 to 8)
+const TOOLS_OPTIONS = [
+  { id: 'code-editor', name: 'Code Editor', icon: Code, description: 'Write and run code' },
+  { id: 'notes', name: 'Notes', icon: StickyNote, description: 'Keep-style notes' },
+  { id: 'youtube', name: 'YouTube', icon: Youtube, description: 'Video tutorials' },
+  { id: 'classroom', name: 'Classroom', icon: GraduationCap, description: 'Google Classroom' },
+  { id: 'calendar', name: 'Calendar', icon: Calendar, description: 'Schedule events' },
+  { id: 'documentation', name: 'Docs', icon: FileText, description: 'Reference materials' },
+  { id: 'whiteboard', name: 'Whiteboard', icon: PenTool, description: 'Draw and diagram' },
+  { id: 'terminal', name: 'Terminal', icon: Terminal, description: 'Command line' },
 ];
 
 const LEVEL_OPTIONS: Array<{
@@ -103,7 +121,7 @@ export default function CreateSpace() {
     learning_goal: '',
     level: 'intermediate',
     duration_weeks: 12,
-    instructor_type: 'ai',
+    selected_tools: ['code-editor', 'notes'],
   });
 
   const isStepValid = () => {
@@ -119,7 +137,7 @@ export default function CreateSpace() {
       case 5:
         return formData.duration_weeks > 0;
       case 6:
-        return formData.instructor_type !== null;
+        return formData.selected_tools.length >= 2 && formData.selected_tools.length <= 6;
       default:
         return false;
     }
@@ -263,8 +281,8 @@ export default function CreateSpace() {
                 <Card
                   key={option.value}
                   className={`p-6 cursor-pointer transition-all border ${formData.level === option.value
-                      ? 'bg-primary/10 border-neon'
-                      : 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 hover:border-white/30'
+                    ? 'bg-primary/10 border-neon'
+                    : 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 hover:border-white/30'
                     }`}
                   onClick={() => setFormData({ ...formData, level: option.value })}
                 >
@@ -299,8 +317,8 @@ export default function CreateSpace() {
                 <Card
                   key={weeks}
                   className={`p-5 cursor-pointer text-center transition-all ${formData.duration_weeks === weeks
-                      ? 'bg-primary/10 border-neon'
-                      : 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 hover:border-white/30'
+                    ? 'bg-primary/10 border-neon'
+                    : 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 hover:border-white/30'
                     }`}
                   onClick={() =>
                     setFormData({ ...formData, duration_weeks: weeks })
@@ -326,60 +344,78 @@ export default function CreateSpace() {
       case 6:
         return (
           <div className="space-y-6">
-            <Label className="text-lg font-black uppercase text-white block">
-              Choose your learning instructor
-            </Label>
-
-            <div className="space-y-4">
-              <Card
-                className={`p-6 cursor-pointer transition-all ${formData.instructor_type === 'ai'
-                    ? 'bg-primary/10 border-neon'
-                    : 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 hover:border-white/30'
+            <div className="flex items-center justify-between">
+              <Label className="text-lg font-black uppercase text-white block">
+                Select your workspace tools
+              </Label>
+              <Badge
+                variant="outline"
+                className={`font-bold ${formData.selected_tools.length < 2 ? 'border-red-500 text-red-400' :
+                    formData.selected_tools.length > 6 ? 'border-red-500 text-red-400' :
+                      'border-primary text-primary'
                   }`}
-                onClick={() =>
-                  setFormData({ ...formData, instructor_type: 'ai' })
-                }
               >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="font-black uppercase text-xl text-white flex items-center gap-2 mb-2">
-                      <Sparkles className="h-5 w-5 text-primary" />
-                      AI Instructor (Recommended)
-                    </h4>
-                    <p className="text-base text-white/70 font-medium">
-                      Powered by Gemini. Available 24/7, adapts to your pace.
-                    </p>
-                  </div>
-                  {formData.instructor_type === 'ai' && (
-                    <Check className="h-6 w-6 text-primary" />
-                  )}
-                </div>
-              </Card>
-
-              <Card
-                className={`p-6 cursor-pointer transition-all ${formData.instructor_type === 'human'
-                    ? 'bg-accent/10 border-purple'
-                    : 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 hover:border-white/30'
-                  }`}
-                onClick={() =>
-                  setFormData({ ...formData, instructor_type: 'human' })
-                }
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="font-black uppercase text-xl text-white mb-2">
-                      Human Instructor
-                    </h4>
-                    <p className="text-base text-white/70 font-medium">
-                      Connect with expert teachers. Schedule-based sessions.
-                    </p>
-                  </div>
-                  {formData.instructor_type === 'human' && (
-                    <Check className="h-6 w-6 text-accent" />
-                  )}
-                </div>
-              </Card>
+                {formData.selected_tools.length}/6 selected
+              </Badge>
             </div>
+
+            <p className="text-base text-white/60 font-medium">
+              Choose 2-6 tools for your workspace. You can change these later.
+            </p>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {TOOLS_OPTIONS.map((tool) => {
+                const ToolIcon = tool.icon;
+                const isSelected = formData.selected_tools.includes(tool.id);
+                const isDisabled = !isSelected && formData.selected_tools.length >= 6;
+
+                return (
+                  <Card
+                    key={tool.id}
+                    className={`p-4 cursor-pointer transition-all text-center ${isSelected
+                        ? 'bg-primary/10 border-2 border-primary'
+                        : isDisabled
+                          ? 'bg-slate-800/50 border-slate-700 opacity-50 cursor-not-allowed'
+                          : 'bg-slate-800/80 border-2 border-slate-700 hover:border-white/30'
+                      }`}
+                    onClick={() => {
+                      if (isDisabled) return;
+
+                      if (isSelected) {
+                        setFormData({
+                          ...formData,
+                          selected_tools: formData.selected_tools.filter((t) => t !== tool.id),
+                        });
+                      } else {
+                        setFormData({
+                          ...formData,
+                          selected_tools: [...formData.selected_tools, tool.id],
+                        });
+                      }
+                    }}
+                  >
+                    <div className="relative">
+                      {isSelected && (
+                        <div className="absolute -top-1 -right-1">
+                          <Check className="h-5 w-5 text-primary" />
+                        </div>
+                      )}
+                      <ToolIcon className={`h-8 w-8 mx-auto mb-2 ${isSelected ? 'text-primary' : 'text-white/70'}`} />
+                      <h4 className={`font-bold text-sm ${isSelected ? 'text-primary' : 'text-white'}`}>
+                        {tool.name}
+                      </h4>
+                      <p className="text-xs text-white/50 mt-1">{tool.description}</p>
+                    </div>
+                  </Card>
+                );
+              })}
+            </div>
+
+            {formData.selected_tools.length < 2 && (
+              <p className="text-sm text-red-400 font-medium">
+                Please select at least 2 tools to continue.
+              </p>
+            )}
           </div>
         );
 
@@ -430,10 +466,10 @@ export default function CreateSpace() {
                     <div className="flex flex-col items-center">
                       <div
                         className={`w-12 h-12 rounded-full flex items-center justify-center transition-all font-black text-base ${isActive
-                            ? 'bg-primary text-black'
-                            : isCompleted
-                              ? 'bg-accent text-white'
-                              : 'bg-white dark:bg-slate-800 text-white/50 border-2 border-slate-200 dark:border-slate-700'
+                          ? 'bg-primary text-black'
+                          : isCompleted
+                            ? 'bg-accent text-white'
+                            : 'bg-white dark:bg-slate-800 text-white/50 border-2 border-slate-200 dark:border-slate-700'
                           }`}
                       >
                         {isCompleted ? (
@@ -444,10 +480,10 @@ export default function CreateSpace() {
                       </div>
                       <span
                         className={`text-sm font-bold mt-2 uppercase ${isActive
-                            ? 'text-primary'
-                            : isCompleted
-                              ? 'text-accent'
-                              : 'text-white/50'
+                          ? 'text-primary'
+                          : isCompleted
+                            ? 'text-accent'
+                            : 'text-white/50'
                           }`}
                       >
                         {step.name}

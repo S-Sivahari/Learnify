@@ -356,9 +356,9 @@ export default function Profile() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
+    <div className="min-h-screen bg-black">
       {/* Header */}
-      <div className="border-b border-slate-200 dark:border-slate-700 bg-black/50 backdrop-blur-xl sticky top-0 z-40">
+      <div className="border-b border-slate-800 bg-black/50 backdrop-blur-xl sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center gap-4">
             <motion.button
@@ -371,23 +371,25 @@ export default function Profile() {
             </motion.button>
             <div className="flex-1">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#DAFD78] to-[#6C5BA6] flex items-center justify-center shadow-lg shadow-[#DAFD78]/10">
                   <User className="w-6 h-6 text-black" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-black text-white">{user?.name || 'Profile'}</h1>
-                  <p className="text-sm text-gray-400">{user?.email}</p>
+                  <h1 className="text-3xl font-black text-white">
+                    <span className="text-[#DAFD78]">Learn</span><span className="text-[#6C5BA6]">ify</span> Profile
+                  </h1>
+                  <p className="text-sm font-bold text-gray-500 uppercase tracking-tighter">{user?.name} &bull; {user?.email}</p>
                 </div>
               </div>
             </div>
             <div className="hidden md:flex items-center gap-4">
-              <div className="text-center px-4 py-2 bg-white/5 rounded-lg border border-slate-200 dark:border-slate-700">
-                <p className="text-2xl font-black text-primary">{user?.xp || 0}</p>
-                <p className="text-xs text-gray-400">XP</p>
+              <div className="text-center px-4 py-2 bg-slate-900 rounded-lg border border-[#DAFD78]/20">
+                <p className="text-2xl font-black text-[#DAFD78]">{user?.xp || 0}</p>
+                <p className="text-xs font-bold text-gray-500">XP</p>
               </div>
-              <div className="text-center px-4 py-2 bg-white/5 rounded-lg border border-slate-200 dark:border-slate-700">
-                <p className="text-2xl font-black text-accent">Lvl {user?.level || 1}</p>
-                <p className="text-xs text-gray-400">Level</p>
+              <div className="text-center px-4 py-2 bg-slate-900 rounded-lg border border-[#DAFD78]/20">
+                <p className="text-2xl font-black text-[#DAFD78]">Lvl {user?.level || 1}</p>
+                <p className="text-xs font-bold text-gray-500">Level</p>
               </div>
             </div>
           </div>
@@ -404,9 +406,9 @@ export default function Profile() {
                 key={tab.id}
                 variant={activeTab === tab.id ? 'default' : 'outline'}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 whitespace-nowrap ${activeTab === tab.id
-                  ? 'bg-primary hover:bg-primary/90 text-black font-black'
-                  : 'border-slate-200 dark:border-slate-700 text-white hover:bg-white/10'
+                className={`flex items-center gap-2 whitespace-nowrap px-4 py-2 rounded-xl transition-all font-bold ${activeTab === tab.id
+                  ? 'bg-[#DAFD78] text-black shadow-lg shadow-[#DAFD78]/20 scale-105'
+                  : 'border border-slate-800 text-gray-400 hover:bg-slate-800 hover:text-white'
                   }`}
               >
                 <Icon className="w-4 h-4" />

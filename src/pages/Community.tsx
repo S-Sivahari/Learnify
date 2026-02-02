@@ -59,7 +59,6 @@ import {
   type LeaderboardEntry,
   type LeaderboardPeriod,
 } from '@/services/leaderboardService';
-import { StudyGroupChat } from '@/components/StudyGroupChat';
 import { MentorChat } from '@/components/MentorChat';
 
 export default function Community() {
@@ -808,7 +807,9 @@ export default function Community() {
               </DialogDescription>
             </DialogHeader>
             <div className="flex-1 min-h-0">
-              <StudyGroupChat group={selectedGroup} />
+              <div className="p-8 text-center text-gray-400">
+                <p>Study group chat has been moved to the Friends page</p>
+              </div>
             </div>
           </DialogContent>
         </Dialog>

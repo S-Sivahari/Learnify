@@ -13,8 +13,25 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Input } from '@/components/ui/input';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { useUnifiedOSStore } from '@/store/unifiedOSStore';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/lib/supabase';
 import {
   Plus,
   Search,
@@ -22,10 +39,12 @@ import {
   Clock,
   TrendingUp,
   Archive,
+  ArchiveRestore,
   MoreVertical,
   ExternalLink,
   LayoutGrid,
-  Sparkles,
+  Pencil,
+  Trash2,
 } from 'lucide-react';
 import type { Space } from '@/types/unifiedOS';
 
@@ -69,6 +88,9 @@ export default function UnifiedOS() {
   const setActiveSpace = useUnifiedOSStore((state) => state.setActiveSpace);
   const [searchQuery, setSearchQuery] = useState('');
   const [showArchived, setShowArchived] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [spaceToDelete, setSpaceToDelete] = useState<Space | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // Load spaces on mount
   useEffect(() => {
@@ -99,6 +121,81 @@ export default function UnifiedOS() {
     navigate('/unified-os/create');
   };
 
+  const handleEditSpace = (e: React.MouseEvent, space: Space) => {
+    e.stopPropagation();
+    navigate(`/unified-os/edit/${space.id}`);
+  };
+
+  const handleArchiveSpace = async (e: React.MouseEvent, space: Space) => {
+    e.stopPropagation();
+    try {
+      const { error } = await supabase
+        .from('workspaces')
+        .update({ is_archived: !space.is_archived })
+        .eq('id', space.id);
+
+      if (error) throw error;
+
+      // Update local state
+      setSpaces(
+        spaces.map((s) =>
+          s.id === space.id ? { ...s, is_archived: !s.is_archived } : s
+        )
+      );
+
+      toast({
+        title: space.is_archived ? 'Workspace Restored' : 'Workspace Archived',
+        description: space.is_archived
+          ? `"${space.name}" has been restored.`
+          : `"${space.name}" has been archived.`,
+      });
+    } catch {
+      toast({
+        title: 'Error',
+        description: 'Failed to update workspace.',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const handleDeleteClick = (e: React.MouseEvent, space: Space) => {
+    e.stopPropagation();
+    setSpaceToDelete(space);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!spaceToDelete) return;
+
+    setIsDeleting(true);
+    try {
+      const { error } = await supabase
+        .from('workspaces')
+        .delete()
+        .eq('id', spaceToDelete.id);
+
+      if (error) throw error;
+
+      // Update local state
+      setSpaces(spaces.filter((s) => s.id !== spaceToDelete.id));
+
+      toast({
+        title: 'Workspace Deleted',
+        description: `"${spaceToDelete.name}" has been permanently deleted.`,
+      });
+    } catch {
+      toast({
+        title: 'Error',
+        description: 'Failed to delete workspace.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsDeleting(false);
+      setDeleteDialogOpen(false);
+      setSpaceToDelete(null);
+    }
+  };
+
   const getLevelColor = (level: Space['level']) => {
     switch (level) {
       case 'beginner':
@@ -124,32 +221,26 @@ export default function UnifiedOS() {
   };
 
   return (
-    <div className="relative min-h-screen bg-slate-50 dark:bg-slate-900 text-white">
-      {/* Cosmic Background */}
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1A1D23] via-[#252A33] to-[#1A1D23]" />
-        <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-primary/5 via-transparent to-transparent" />
-      </div>
-
+    <div className="relative min-h-screen bg-black text-white">
       <div className="relative z-10">
         {/* Header */}
-        <div className="border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/90 backdrop-blur-xl px-6 py-6">
+        <div className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-xl px-6 py-6 mt-4 mx-6 rounded-2xl border border-slate-700/30 shadow-2xl">
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <LayoutGrid className="h-8 w-8 text-primary" />
-                <h1 className="text-4xl font-black uppercase text-primary">
-                  Workspaces
+                <LayoutGrid className="h-8 w-8 text-[#DAFD78]" />
+                <h1 className="text-4xl font-black uppercase text-white tracking-tight">
+                  <span className="text-[#DAFD78]">Work</span>spaces
                 </h1>
               </div>
-              <p className="text-base font-bold text-white/70 uppercase">
+              <p className="text-base font-bold text-gray-500 uppercase tracking-widest">
                 Your personalized learning environments
               </p>
             </div>
 
             <Button
               onClick={handleCreateSpace}
-              className="bg-primary text-black hover:bg-primary/90 font-black uppercase text-base h-12 px-6"
+              className="bg-[#DAFD78] text-black hover:bg-[#DAFD78]/90 font-black uppercase text-base h-12 px-6 rounded-xl shadow-[0_0_20px_rgba(218,253,120,0.2)] transition-all hover:scale-105"
               size="lg"
             >
               <Plus className="h-5 w-5 mr-2" />
@@ -250,17 +341,53 @@ export default function UnifiedOS() {
                             </p>
                           </div>
 
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white/10"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              // TODO: Open menu
-                            }}
-                          >
-                            <MoreVertical className="h-5 w-5" />
-                          </Button>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white/10"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <MoreVertical className="h-5 w-5" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent
+                              align="end"
+                              className="bg-slate-800 border-slate-700 shadow-xl"
+                            >
+                              <DropdownMenuItem
+                                onClick={(e) => handleEditSpace(e, space)}
+                                className="text-white hover:bg-slate-700 cursor-pointer"
+                              >
+                                <Pencil className="h-4 w-4 mr-2" />
+                                Edit Workspace
+                              </DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={(e) => handleArchiveSpace(e, space)}
+                                className="text-white hover:bg-slate-700 cursor-pointer"
+                              >
+                                {space.is_archived ? (
+                                  <>
+                                    <ArchiveRestore className="h-4 w-4 mr-2" />
+                                    Restore
+                                  </>
+                                ) : (
+                                  <>
+                                    <Archive className="h-4 w-4 mr-2" />
+                                    Archive
+                                  </>
+                                )}
+                              </DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={(e) => handleDeleteClick(e, space)}
+                                className="text-red-400 hover:bg-red-500/20 hover:text-red-400 cursor-pointer"
+                              >
+                                <Trash2 className="h-4 w-4 mr-2" />
+                                Delete
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
                         </div>
 
                         {/* Goal */}
@@ -315,6 +442,38 @@ export default function UnifiedOS() {
           )}
         </div>
       </div>
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent className="bg-slate-800 border-slate-700">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-white font-black uppercase flex items-center gap-2">
+              <Trash2 className="h-5 w-5 text-red-500" />
+              Delete Workspace
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-white/70">
+              Are you sure you want to delete{' '}
+              <span className="font-bold text-white">"{spaceToDelete?.name}"</span>?
+              <br />
+              <span className="text-red-400 font-medium">
+                This action cannot be undone.
+              </span>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="bg-slate-700 text-white border-slate-600 hover:bg-slate-600">
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteConfirm}
+              disabled={isDeleting}
+              className="bg-red-600 text-white hover:bg-red-700 font-black"
+            >
+              {isDeleting ? 'Deleting...' : 'Delete'}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
