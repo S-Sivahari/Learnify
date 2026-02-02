@@ -23,7 +23,7 @@ export default function MathematicsHub() {
   const user = useUserStore((state) => state.user);
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
-  const vrLink = 'https://framevr.io/INTELLI-LEARN-math';
+  const vrLink = 'https://framevr.io/learnify-math';
 
   const copyToClipboard = async () => {
     try {
@@ -200,7 +200,7 @@ export default function MathematicsHub() {
             <CardContent className="p-0">
               <div className="relative w-full bg-black rounded-b-lg overflow-hidden">
                 <iframe
-                  src="https://framevr.io/INTELLI-LEARN-math"
+                  src="https://framevr.io/learnify-math"
                   className="w-full border-0"
                   allow="microphone; camera; fullscreen; autoplay; xr-spatial-tracking"
                   allowFullScreen
@@ -336,7 +336,7 @@ export default function MathematicsHub() {
                     'Click on whiteboards to draw equations and graphs',
                     'Use voice chat to discuss problems with study partners',
                     'Access the AI tutor by clicking the helper icon',
-                    'Save your work to your INTELLI-LEARN notebook',
+                    'Save your work to your Learnify notebook',
                   ].map((step, index) => (
                     <li key={index} className="flex items-start gap-3 text-white/70 text-sm group">
                       <div className="mt-0.5 shrink-0">

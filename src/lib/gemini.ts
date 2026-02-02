@@ -224,7 +224,7 @@ export async function chatWithGemini(messages: GeminiMessage[]): Promise<string>
       .map((msg) => `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}`)
       .join('\n\n');
 
-    const prompt = `You are INTELLI-LEARN's friendly AI study mentor. Provide concise, encouraging, and structured answers.
+    const prompt = `You are Learnify's friendly AI study mentor. Provide concise, encouraging, and structured answers.
 
 Conversation so far:
 ${conversationContext}
@@ -421,7 +421,7 @@ export async function translateText(text: string, targetLanguage: string): Promi
 
 export async function generateCoursePlan(input: CourseGeneratorInput): Promise<GeneratedCoursePlan> {
   try {
-    const prompt = `You are INTELLI-LEARN's curriculum designer. Build a complete, week-by-week course outline.
+    const prompt = `You are Learnify's curriculum designer. Build a complete, week-by-week course outline.
 Learner profile:
 - Topic: ${input.topic}
 - Desired outcome: ${input.outcome}

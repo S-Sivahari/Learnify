@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 
 const MOCK_CAPTIONS = [
-  "Welcome to INTELLI-LEARN, your personalized learning platform.",
+  "Welcome to Learnify, your personalized learning platform.",
   "Navigate through courses using the sidebar menu.",
   "Click on any course card to view detailed content.",
   "Use the AI chatbot for instant help with your studies.",

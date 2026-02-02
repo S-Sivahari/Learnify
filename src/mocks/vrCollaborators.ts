@@ -42,7 +42,7 @@ export const MOCK_VR_ROOMS: VRRoom[] = [
   {
     id: 'room-main',
     name: 'Main Study Hall',
-    frameUrl: 'https://framevr.io/INTELLI-LEARN',
+    frameUrl: 'https://framevr.io/learnify',
     usersOnline: 24,
     whiteboardsActive: 2,
     maxWhiteboards: 4,
@@ -51,7 +51,7 @@ export const MOCK_VR_ROOMS: VRRoom[] = [
   {
     id: 'room-1',
     name: 'Mathematics Hub',
-    frameUrl: 'https://framevr.io/INTELLI-LEARN/math-hub',
+    frameUrl: 'https://framevr.io/learnify/math-hub',
     usersOnline: 12,
     whiteboardsActive: 3,
     maxWhiteboards: 4,
@@ -60,7 +60,7 @@ export const MOCK_VR_ROOMS: VRRoom[] = [
   {
     id: 'room-2',
     name: 'Science Lab',
-    frameUrl: 'https://framevr.io/INTELLI-LEARN/science-lab',
+    frameUrl: 'https://framevr.io/learnify/science-lab',
     usersOnline: 8,
     whiteboardsActive: 2,
     maxWhiteboards: 4,
@@ -69,7 +69,7 @@ export const MOCK_VR_ROOMS: VRRoom[] = [
   {
     id: 'room-3',
     name: 'Creative Arts Studio',
-    frameUrl: 'https://framevr.io/INTELLI-LEARN/arts-studio',
+    frameUrl: 'https://framevr.io/learnify/arts-studio',
     usersOnline: 15,
     whiteboardsActive: 4,
     maxWhiteboards: 4,
@@ -78,7 +78,7 @@ export const MOCK_VR_ROOMS: VRRoom[] = [
   {
     id: 'room-4',
     name: 'Language Lounge',
-    frameUrl: 'https://framevr.io/INTELLI-LEARN/language-lounge',
+    frameUrl: 'https://framevr.io/learnify/language-lounge',
     usersOnline: 6,
     whiteboardsActive: 1,
     maxWhiteboards: 4,
@@ -87,7 +87,7 @@ export const MOCK_VR_ROOMS: VRRoom[] = [
   {
     id: 'room-5',
     name: 'Exam Prep Center',
-    frameUrl: 'https://framevr.io/INTELLI-LEARN/exam-prep',
+    frameUrl: 'https://framevr.io/learnify/exam-prep',
     usersOnline: 20,
     whiteboardsActive: 4,
     maxWhiteboards: 4,

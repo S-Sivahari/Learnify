@@ -61,7 +61,7 @@ serve(async (req) => {
             'Authorization': `Bearer ${RESEND_API_KEY}`
           },
           body: JSON.stringify({
-            from: 'INTELLI-LEARN Study Planner <notifications@edumite.app>',
+            from: 'Learnify Study Planner <notifications@edumite.app>',
             to: [notification.recipient_email],
             subject: notification.subject,
             html: `
@@ -84,7 +84,7 @@ serve(async (req) => {
                 <body>
                   <div class="container">
                     <div class="header">
-                      <h1>📚 INTELLI-LEARN Exam Reminder</h1>
+                      <h1>📚 Learnify Exam Reminder</h1>
                     </div>
                     <div class="content">
                       <p>${notification.body}</p>
@@ -97,7 +97,7 @@ serve(async (req) => {
                         ${notification.exam_schedules.location ? `<p><strong>📍 Location:</strong> ${notification.exam_schedules.location}</p>` : ''}
                       </div>
                       
-                      <p>Open your INTELLI-LEARN Study Planner to review your preparation materials and schedule.</p>
+                      <p>Open your Learnify Study Planner to review your preparation materials and schedule.</p>
                       
                       <a href="https://edumite.app/study-planner" class="cta-button">Open Study Planner →</a>
                       

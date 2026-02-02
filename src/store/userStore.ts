@@ -46,7 +46,7 @@ export const useUserStore = create<UserState>()(
         }),
     }),
     {
-      name: 'INTELLI-LEARN-user',
+      name: 'learnify-user',
     }
   )
 );

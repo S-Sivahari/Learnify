@@ -313,7 +313,7 @@ export const CRISIS_RESOURCES: CrisisResource[] = [
     id: 'crisis-003',
     name: 'Student Support Services',
     type: 'website',
-    contact: 'support.INTELLI-LEARN.com',
+    contact: 'support.learnify.com',
     description: 'Connect with campus counselors and peer support groups',
     available: 'Mon-Fri 8AM-8PM'
   },
@@ -321,7 +321,7 @@ export const CRISIS_RESOURCES: CrisisResource[] = [
     id: 'crisis-004',
     name: 'Anonymous Chat',
     type: 'chat',
-    contact: 'chat.INTELLI-LEARN.com/anonymous',
+    contact: 'chat.learnify.com/anonymous',
     description: 'Talk to trained peer supporters anonymously',
     available: '24/7'
   }

@@ -8,7 +8,7 @@ interface WhiteboardSession {
 }
 
 const MAX_STROKES_PER_SESSION = 100;
-const SESSION_KEY_PREFIX = 'INTELLI-LEARN_whiteboard_';
+const SESSION_KEY_PREFIX = 'learnify_whiteboard_';
 
 /**
  * Custom hook for managing whiteboard session state

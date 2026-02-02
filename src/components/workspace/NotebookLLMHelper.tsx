@@ -372,7 +372,7 @@ async function exportToPPTX(
   const pptx = new PptxGenJS();
 
   // Presentation metadata
-  pptx.author = 'EdTech Unified OS';
+  pptx.author = 'Learnify Unified OS';
   pptx.title = `${topic} - ${space.subject}`;
   pptx.subject = space.subject;
 

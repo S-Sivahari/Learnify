@@ -51,7 +51,7 @@ export const useAccessibilityStore = create<AccessibilityState>()(
       resetSettings: () => set(defaultSettings),
     }),
     {
-      name: 'INTELLI-LEARN-accessibility',
+      name: 'learnify-accessibility',
     }
   )
 );

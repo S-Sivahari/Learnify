@@ -73,7 +73,7 @@ serve(async (req) => {
 
     // STEP 2: Construct Mega Prompt with Trust Engine Rules
     const megaPrompt = `
-You are an AI Tutor for the INTELLI-LEARN learning platform, powered by the Constrained Trust Engine.
+You are an AI Tutor for the Learnify learning platform, powered by the Constrained Trust Engine.
 
 🎯 WORKSPACE CONTEXT: ${workspaceType.toUpperCase()}
 

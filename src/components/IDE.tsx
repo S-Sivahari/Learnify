@@ -39,7 +39,7 @@ function greet(name) {
 greet('Learner');`,
   python: `# Python Starter Code
 def greet(name: str) -> None:
-    print(f"Hello, {name}! Welcome to the INTELLI-LEARN sandbox.")
+    print(f"Hello, {name}! Welcome to the Learnify sandbox.")
 
 greet("Learner")`,
   java: `// Java Starter Code
@@ -47,13 +47,13 @@ import java.util.*;
 
 public class Main {
   public static void main(String[] args) {
-    System.out.println("Hello from INTELLI-LEARN IDE!");
+    System.out.println("Hello from Learnify IDE!");
   }
 }`,
   c: `#include <stdio.h>
 
 int main(void) {
-  printf("Hello from INTELLI-LEARN IDE!\n");
+  printf("Hello from Learnify IDE!\n");
   return 0;
 }`,
 };

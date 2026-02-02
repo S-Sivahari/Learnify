@@ -106,7 +106,7 @@ export const MOCK_ANALYTICS: MockAnalytics = {
     {
       id: 'ach-001',
       title: 'Early Adopter',
-      description: 'Joined INTELLI-LEARN in its first month',
+      description: 'Joined Learnify in its first month',
       icon: '🌟',
       unlockedAt: '2024-09-15',
       rarity: 'rare',

@@ -46,7 +46,7 @@ export const SmartAutoFillPanel = () => {
             <div className="flex-1">
               <CardTitle className="text-lg">Smart Auto-Fill Assistance</CardTitle>
               <CardDescription className="mt-1">
-                Let INTELLI-LEARN handle the paperwork while you focus on your goals
+                Let Learnify handle the paperwork while you focus on your goals
               </CardDescription>
             </div>
           </div>

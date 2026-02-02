@@ -275,7 +275,7 @@ export function WhiteboardPanel({
       const link = document.createElement('a');
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
       link.href = dataUrl;
-      link.download = `INTELLI-LEARN-whiteboard-${roomName.toLowerCase().replace(/\s+/g, '-')}-${timestamp}.png`;
+      link.download = `learnify-whiteboard-${roomName.toLowerCase().replace(/\s+/g, '-')}-${timestamp}.png`;
       link.click();
 
       toast({

@@ -13,7 +13,7 @@ interface OnboardingStep {
 
 const ONBOARDING_STEPS: OnboardingStep[] = [
     {
-        title: "Welcome to INTELLI-LEARN! 🎓",
+        title: "Welcome to Learnify! 🎓",
         description: "Let's take a quick tour to help you get started with your AI-powered learning journey.",
         position: 'center'
     },

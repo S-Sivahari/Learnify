@@ -1,7 +1,7 @@
 /**
  * AI Client - Gemini API Integration Stub
  * 
- * Central AI service layer for all LLM-powered features in INTELLI-LEARN.
+ * Central AI service layer for all LLM-powered features in Learnify.
  * Routes requests to appropriate context handlers and returns mocked/real responses.
  * 
  * SECURITY: Never exposes API keys to logs, errors, or client-side code.
