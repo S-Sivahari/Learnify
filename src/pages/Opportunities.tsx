@@ -168,7 +168,7 @@ export default function Opportunities() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
+    <div className="min-h-screen" style={{ backgroundColor: '#14171e' }}>
       {/* Header */}
       <div className="border-b border-slate-200 dark:border-slate-700 bg-black/50 backdrop-blur-xl sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -185,7 +185,11 @@ export default function Opportunities() {
               <div className="flex items-center gap-3">
                 <Target className="w-8 h-8 text-primary" />
                 <div>
-                  <h1 className="text-3xl font-black text-white">Opportunities Center</h1>
+                  <h1 className="text-3xl font-black text-white">
+                    <span style={{ color: '#d9fd77' }}>Opportunities</span>
+                    {' '}
+                    <span style={{ color: '#6C5BA6' }}>Center</span>
+                  </h1>
                   <p className="text-sm text-gray-400 mt-1">
                     Scholarships, schemes, competitions & more
                   </p>

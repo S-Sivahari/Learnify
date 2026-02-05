@@ -203,7 +203,7 @@ export default function WorkspaceView() {
 
   if (!config || !workspaceType) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#14171e' }}>
         <div className="text-center">
           <h1 className="text-4xl font-black text-primary mb-4">Workspace Not Found</h1>
           <Button onClick={() => navigate('/dashboard')}>

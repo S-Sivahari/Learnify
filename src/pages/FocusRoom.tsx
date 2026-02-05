@@ -123,8 +123,10 @@ export default function FocusRoom() {
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
           <div className="mb-8 flex items-center gap-3">
             <Clock className="h-8 w-8 text-primary" />
-            <h1 className="text-4xl font-black uppercase text-[#DAFD78] drop-shadow-[2px_2px_0px_#000]">
-              <TranslatedText text="Focus Room" />
+            <h1 className="text-4xl font-black uppercase drop-shadow-[2px_2px_0px_#000]">
+              <span style={{ color: '#DAFD78' }}>Focus</span>
+              {' '}
+              <span style={{ color: '#6C5BA6' }}><TranslatedText text="Room" /></span>
             </h1>
           </div>
         </motion.div>

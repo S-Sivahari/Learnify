@@ -59,7 +59,7 @@ export default function Wellness() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
+    <div className="min-h-screen" style={{ backgroundColor: '#14171e' }}>
       {/* Header */}
       <div className="border-b border-white/10 bg-black/50 backdrop-blur-xl sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -78,7 +78,11 @@ export default function Wellness() {
                   <Heart className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-black text-white">Emotional Wellness</h1>
+                  <h1 className="text-3xl font-black text-white">
+                    <span style={{ color: '#d9fd77' }}>Emotional</span>
+                    {' '}
+                    <span style={{ color: '#6C5BA6' }}>Wellness</span>
+                  </h1>
                   <p className="text-sm text-gray-400 mt-1">
                     Your mental health matters. We're here to support you.
                   </p>

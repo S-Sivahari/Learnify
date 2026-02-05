@@ -181,7 +181,7 @@ export default function Login() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            <h1 className="font-display text-5xl lg:text-6xl font-black uppercase tracking-tight mb-8">
+            <h1 className="text-5xl lg:text-6xl font-black uppercase tracking-tight mb-8">
               <span className="text-white">ASCEND YOUR</span>
               <br />
               <span className="bg-gradient-to-r from-neon via-neon to-yellow-400 bg-clip-text text-transparent">
@@ -198,15 +198,15 @@ export default function Login() {
             transition={{ delay: 0.6 }}
           >
             <div className="border-l-2 border-neon pl-4">
-              <div className="text-3xl font-display font-bold text-white">#15</div>
+              <div className="text-3xl font-bold text-white">#15</div>
               <div className="text-xs text-muted-foreground uppercase tracking-wider">Global Rank</div>
             </div>
             <div className="border-l-2 border-purple pl-4">
-              <div className="text-3xl font-display font-bold text-white">12.5k</div>
+              <div className="text-3xl font-bold text-white">12.5k</div>
               <div className="text-xs text-muted-foreground uppercase tracking-wider">XP Earned</div>
             </div>
             <div className="border-l-2 border-white/30 pl-4">
-              <div className="text-3xl font-display font-bold text-white">24</div>
+              <div className="text-3xl font-bold text-white">24</div>
               <div className="text-xs text-muted-foreground uppercase tracking-wider">Day Streak</div>
             </div>
           </motion.div>
@@ -227,7 +227,7 @@ export default function Login() {
 
               <div className="relative z-10">
                 <div className="text-center mb-8">
-                  <h2 className="font-display text-3xl font-bold text-white uppercase tracking-wide mb-2">
+                  <h2 className="text-3xl font-bold text-white uppercase tracking-wide mb-2">
                     <TranslatedText text="Welcome Back" />
                   </h2>
                   <p className="text-muted-foreground text-sm">

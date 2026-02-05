@@ -94,7 +94,7 @@ export default function SignLanguage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-800">
+    <div className="min-h-screen" style={{ backgroundColor: '#14171e' }}>
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="relative max-w-4xl mx-auto px-6 pt-12 pb-8">

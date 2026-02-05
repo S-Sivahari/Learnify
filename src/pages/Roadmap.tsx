@@ -287,7 +287,7 @@ export default function Roadmap() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-background"
+      className="min-h-screen" style={{ backgroundColor: '#14171e' }}
     >
       {/* Hero Header */}
       <div className="relative border-b-4 border-black bg-black overflow-hidden">
@@ -312,7 +312,11 @@ export default function Roadmap() {
           >
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-3">Learning Roadmaps</h1>
+                <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-3">
+                  <span style={{ color: '#d9fd77' }}>Learning</span>
+                  {' '}
+                  <span style={{ color: '#6C5BA6' }}>Roadmaps</span>
+                </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl">
                   {showRoadmapGrid
                     ? 'Select roadmaps to start your learning journey. Track milestones, earn XP, and level up your skills.'

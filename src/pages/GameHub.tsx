@@ -50,9 +50,11 @@ export default function GameHub() {
               <ArrowLeft className="h-5 w-5" />
             </Button>
             <div>
-              <h1 className="text-3xl font-black text-primary uppercase tracking-tight flex items-center gap-2">
+              <h1 className="text-3xl font-black uppercase tracking-tight flex items-center gap-2">
                 <Gamepad2 className="h-7 w-7" />
-                Game Hub
+                <span style={{ color: '#d9fd77' }}>Game</span>
+                {' '}
+                <span style={{ color: '#6C5BA6' }}>Hub</span>
               </h1>
               <p className="text-sm text-text/60 uppercase font-bold">
                 VR + XP Competition System

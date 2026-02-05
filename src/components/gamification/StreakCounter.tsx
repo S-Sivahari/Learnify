@@ -41,7 +41,7 @@ export default function StreakCounter({
 
             {/* Streak count */}
             <div className="flex flex-col">
-                <span className="font-display text-2xl font-bold text-white leading-none">
+                <span className="text-2xl font-bold text-white leading-none">
                     {days}
                 </span>
                 <span className="text-xs text-muted-foreground uppercase tracking-wider">

@@ -351,7 +351,7 @@ export default function Workspace() {
   const maximizedPanel = panels.find(p => p.isMaximized);
 
   return (
-    <div className="relative min-h-screen bg-background">
+    <div className="relative min-h-screen" style={{ backgroundColor: '#14171e' }}>
       {/* Cosmic Background */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0D1117] via-[#161B22] to-[#0D1117]" />
@@ -372,7 +372,7 @@ export default function Workspace() {
               <div className="flex items-center gap-2">
                 <LayoutGrid className="h-6 w-6 text-primary" />
                 <h1 className="text-2xl font-black">
-                  <TranslatedText text="Workspace" />
+                  <span style={{ color: '#d9fd77' }}>Work</span><span style={{ color: '#6C5BA6' }}>space</span>
                 </h1>
               </div>
               <Badge variant="outline" className="font-bold">

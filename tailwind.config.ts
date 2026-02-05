@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
 
 export default {
-  darkMode: ["class"],
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
@@ -18,15 +17,58 @@ export default {
         'body': ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
-        // UNIFIED BRAND THEME - Corrected (Lime & Purple)
+        // PROFESSIONAL MODERN DARK UI - HSL Variables
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))'
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))'
+        },
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))'
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))'
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))'
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))'
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))'
+        },
+        success: {
+          DEFAULT: 'hsl(var(--success))',
+          foreground: 'hsl(var(--success-foreground))'
+        },
+        warning: {
+          DEFAULT: 'hsl(var(--warning))',
+          foreground: 'hsl(var(--warning-foreground))'
+        },
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        
+        // Legacy aliases for backwards compatibility
         neon: {
           DEFAULT: '#DAFD78',
           300: '#DAFD78',
         },
         cosmic: {
-          DEFAULT: '#000000',
-          500: '#171923',
-          600: '#000000',
+          DEFAULT: '#161a20',
+          500: '#171b21',
+          600: '#161a20',
         },
         purple: {
           DEFAULT: '#6C5BA6',
@@ -38,31 +80,9 @@ export default {
         pink: {
           DEFAULT: '#6C5BA6',
         },
-        deepblack: '#000000',
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: '#000000',
-        foreground: '#FFFFFF',
-        primary: {
-          DEFAULT: '#DAFD78',
-          foreground: '#000000',
-        },
-        secondary: {
-          DEFAULT: '#6C5BA6',
-          foreground: '#FFFFFF',
-        },
-        card: {
-          DEFAULT: '#171923',
-          foreground: '#FFFFFF',
-        },
-        popover: {
-          DEFAULT: '#171923',
-          foreground: '#FFFFFF',
-        },
       },
       backgroundImage: {
-        'gradient-cosmic': 'linear-gradient(135deg, #0C0E17 0%, #171B21 50%, #0C0E17 100%)',
+        'gradient-cosmic': 'linear-gradient(135deg, #161a20 0%, #171b21 50%, #161a20 100%)',
         'gradient-accent': 'linear-gradient(135deg, #DAFD78 0%, #3FB950 100%)',
         'gradient-neon': 'linear-gradient(135deg, #DAFD78 0%, #6C5BA6 100%)',
         'gradient-purple': 'linear-gradient(135deg, #6C5BA6 0%, #58A6FF 100%)',

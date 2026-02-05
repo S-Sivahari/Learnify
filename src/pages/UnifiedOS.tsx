@@ -229,8 +229,9 @@ export default function UnifiedOS() {
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <LayoutGrid className="h-8 w-8 text-[#DAFD78]" />
-                <h1 className="text-4xl font-black uppercase text-white tracking-tight">
-                  <span className="text-[#DAFD78]">Work</span>spaces
+                <h1 className="text-4xl font-black uppercase tracking-tight">
+                  <span style={{ color: '#d9fd77' }}>Work</span>
+                  <span style={{ color: '#6C5BA6' }}>spaces</span>
                 </h1>
               </div>
               <p className="text-base font-bold text-gray-500 uppercase tracking-widest">

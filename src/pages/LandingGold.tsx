@@ -145,7 +145,7 @@ export default function LandingGold() {
                                 AI-POWERED LEARNING PLATFORM
                             </motion.div>
 
-                            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-black uppercase leading-tight mb-6">
+                            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black uppercase leading-tight mb-6">
                                 <span className="text-white">🚀 LEVEL UP YOUR</span>
                                 <br />
                                 <span className="bg-gradient-to-r from-primary via-green-400 to-primary bg-clip-text text-transparent">
@@ -192,7 +192,7 @@ export default function LandingGold() {
                                     >
                                         <div className="flex items-center justify-center gap-2 text-primary mb-1">
                                             {stat.icon}
-                                            <span className="font-display text-2xl font-bold">{stat.value}</span>
+                                            <span className="text-2xl font-bold">{stat.value}</span>
                                         </div>
                                         <div className="text-xs text-muted-foreground uppercase tracking-wider">
                                             {stat.label}
@@ -247,7 +247,7 @@ export default function LandingGold() {
                         viewport={{ once: true }}
                         className="text-center mb-16"
                     >
-                        <h2 className="font-display text-4xl md:text-5xl font-black uppercase mb-4">
+                        <h2 className="text-4xl md:text-5xl font-black uppercase mb-4">
                             <span className="text-white">Power</span>{' '}
                             <span className="bg-gradient-to-r from-primary to-green-400 bg-clip-text text-transparent">
                                 Features
@@ -272,7 +272,7 @@ export default function LandingGold() {
                                 <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${feature.gradient} text-black mb-4`}>
                                     {feature.icon}
                                 </div>
-                                <h3 className="font-display text-lg font-bold uppercase text-white mb-2">
+                                <h3 className="text-lg font-bold uppercase text-white mb-2">
                                     {feature.title}
                                 </h3>
                                 <p className="text-muted-foreground text-sm">{feature.desc}</p>
@@ -291,7 +291,7 @@ export default function LandingGold() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="font-display text-5xl md:text-6xl font-black uppercase text-white mb-6">
+                        <h2 className="text-5xl md:text-6xl font-black uppercase text-white mb-6">
                             Ready to{' '}
                             <span className="bg-gradient-to-r from-primary to-green-400 bg-clip-text text-transparent">
                                 Level Up?

@@ -356,7 +356,7 @@ export default function Profile() {
   ];
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen" style={{ backgroundColor: '#14171e' }}>
       {/* Header */}
       <div className="border-b border-slate-800 bg-black/50 backdrop-blur-xl sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-6 py-4">

@@ -243,7 +243,7 @@ export default function AIBot() {
   };
 
   return (
-    <div className="relative min-h-screen bg-black">
+    <div className="relative min-h-screen" style={{ backgroundColor: '#14171e' }}>
       <div className="container mx-auto h-[calc(100vh-6rem)] px-4 py-6">
         <div className="grid h-full gap-6 lg:grid-cols-[1fr_300px]">
           {/* Chat Area */}
@@ -251,7 +251,11 @@ export default function AIBot() {
             <div className="flex items-center justify-between border-b border-slate-800 p-4 bg-black/50 backdrop-blur-md">
               <div className="flex items-center gap-2">
                 <Sparkles className="h-6 w-6 text-accent" />
-                <h1 className="text-2xl font-black uppercase text-primary"><TranslatedText text="AI Study Assistant" /></h1>
+                <h1 className="text-2xl font-black uppercase">
+                  <span style={{ color: '#d9fd77' }}>AI Study</span>
+                  {' '}
+                  <span style={{ color: '#6C5BA6' }}><TranslatedText text="Assistant" /></span>
+                </h1>
               </div>
               <div className="flex gap-2">
                 <ModeToggle mode={mode} onModeChange={setMode} disabled={isLoading} />

@@ -14,12 +14,12 @@ export default function NavbarGold() {
   };
 
   return (
-    <nav className="sticky top-0 z-30 border-b border-slate-800 bg-black/90 backdrop-blur-xl">
+    <nav className="sticky top-0 z-30 border-b border-slate-800 backdrop-blur-xl" style={{ backgroundColor: '#14171e' }}>
       <div className="w-full px-6 py-3">
         <div className="flex items-center justify-between">
           {/* LOGO */}
-          <Link to="/dashboard" className="flex items-center gap-3 text-3xl font-display font-black tracking-wide transform hover:scale-105 transition-transform">
-            <Rocket className="h-8 w-8 text-[#DAFD78]" />
+          <Link to="/dashboard" className="flex items-center gap-3 text-4xl font-black tracking-wide transform hover:scale-105 transition-transform">
+            <Rocket className="h-10 w-10 text-[#DAFD78]" />
             <span><span className="text-[#DAFD78]">Learn</span><span className="text-[#6C5BA6]">ify</span></span>
           </Link>
 

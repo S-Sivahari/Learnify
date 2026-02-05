@@ -83,7 +83,7 @@ export default function Register() {
         >
           {/* Logo */}
           <div className="mb-8 text-center">
-            <Link to="/" className="inline-flex items-center gap-2 text-3xl font-display font-bold">
+            <Link to="/" className="inline-flex items-center gap-2 text-3xl font-bold">
               <Rocket className="h-8 w-8 text-neon" />
               <span className="text-neon">Learn</span>
               <span className="text-purple">ify</span>
@@ -97,7 +97,7 @@ export default function Register() {
 
             <div className="relative z-10">
               <div className="text-center mb-8">
-                <h2 className="font-display text-3xl font-bold text-white uppercase tracking-wide mb-2">
+                <h2 className="text-3xl font-bold text-white uppercase tracking-wide mb-2">
                   <TranslatedText text="Initialize Account" />
                 </h2>
                 <p className="text-muted-foreground text-sm">

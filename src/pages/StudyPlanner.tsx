@@ -67,7 +67,7 @@ export default function StudyPlanner() {
     : null;
 
   return (
-    <div className="relative min-h-screen bg-slate-50 dark:bg-slate-900 text-white pb-24">
+    <div className="relative min-h-screen text-white pb-24" style={{ backgroundColor: '#14171e' }}>
       {/* Cosmic Background */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0D1117] via-[#161B22] to-[#0D1117]" />
@@ -90,8 +90,8 @@ export default function StudyPlanner() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-6xl font-black uppercase mb-4">
-                <span className="text-primary">Smart</span>
-                <span className="text-accent ml-4">Calendar</span>
+                <span style={{ color: '#d9fd77' }}>Smart</span>
+                <span style={{ color: '#6C5BA6', marginLeft: '1rem' }}>Calendar</span>
               </h1>
               <p className="text-xl text-white/70 font-bold">
                 AI-POWERED STUDY PLANNING & EXAM PREPARATION

@@ -326,12 +326,14 @@ export default function Notes() {
   return (
     <div className="relative min-h-screen bg-slate-50 dark:bg-slate-900">
       {/* Compact Title Bar */}
-      <div className="sticky top-0 z-50 border-b border-purple/30 bg-slate-50 dark:bg-slate-900/95 backdrop-blur-sm">
+      <div className="sticky top-0 z-50 border-b border-purple/30 backdrop-blur-sm" style={{ backgroundColor: '#14171e' }}>
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <FileText className="h-6 w-6 text-accent" />
-            <h1 className="text-2xl font-black uppercase text-accent">
-              <TranslatedText text="Smart Notes" />
+            <h1 className="text-2xl font-black uppercase">
+              <span style={{ color: '#d9fd77' }}>Smart</span>
+              {' '}
+              <span style={{ color: '#6C5BA6' }}><TranslatedText text="Notes" /></span>
             </h1>
           </div>
           <p className="text-sm font-bold text-white/70 uppercase hidden md:block">

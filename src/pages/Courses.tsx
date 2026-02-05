@@ -411,7 +411,9 @@ export default function Courses() {
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
         <div className="mb-8 flex items-center gap-3">
           <BookOpen className="h-8 w-8 text-primary" />
-          <h1 className="text-3xl font-bold"><TranslatedText text="Courses" /></h1>
+          <h1 className="text-3xl font-bold">
+            <span style={{ color: '#d9fd77' }}>Cour</span><span style={{ color: '#6C5BA6' }}>ses</span>
+          </h1>
         </div>
       </motion.div>
 

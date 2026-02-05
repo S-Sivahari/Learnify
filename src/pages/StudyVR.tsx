@@ -276,7 +276,7 @@ export default function StudyVR() {
   const currentQ = filteredQuestions[currentQuestion];
 
   return (
-    <div className="relative min-h-screen bg-slate-50 dark:bg-slate-900">
+    <div className="relative min-h-screen" style={{ backgroundColor: '#14171e' }}>
       {/* Cosmic Background */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0D1117] via-[#161B22] to-[#0D1117]" />
@@ -301,8 +301,10 @@ export default function StudyVR() {
             <Video className="h-8 w-8 text-primary" />
           </div>
           <div>
-            <h1 className="text-5xl font-black uppercase text-primary drop-shadow-[0_0_20px_rgba(190,255,0,0.5)]">
-              <TranslatedText text="Study VR" />
+            <h1 className="text-5xl font-black uppercase drop-shadow-[0_0_20px_rgba(190,255,0,0.5)]">
+              <span style={{ color: '#d9fd77' }}>Study</span>
+              {' '}
+              <span style={{ color: '#6C5BA6' }}>VR</span>
             </h1>
             <p className="text-lg font-bold text-white uppercase mt-2">
               <TranslatedText text="Join your classmates in virtual study environments" />

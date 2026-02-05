@@ -2,21 +2,16 @@ import { useEffect } from 'react';
 import { useThemeStore } from '@/store/themeStore';
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const { mode, isDyslexia, isColorblind } = useThemeStore();
+  const { isDyslexia, isColorblind } = useThemeStore();
 
-  // Directly apply theme class to HTML element
+  // Only apply accessibility modes, no theme switching
   useEffect(() => {
     const root = document.documentElement;
 
-    // Remove all theme classes first
+    // Remove theme classes
     root.classList.remove('light', 'dark', 'colorblind', 'dyslexia');
 
-    // Apply current theme
-    if (mode === 'light' || mode === 'dark') {
-      root.classList.add(mode);
-    }
-
-    // Add accessibility modes
+    // Add accessibility modes only
     if (isDyslexia) {
       root.classList.add('dyslexia');
     }
@@ -24,9 +19,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (isColorblind) {
       root.classList.add('colorblind');
     }
-
-    console.log('Theme applied:', mode, 'Classes:', root.className);
-  }, [mode, isDyslexia, isColorblind]);
+  }, [isDyslexia, isColorblind]);
 
   return <>{children}</>;
 }

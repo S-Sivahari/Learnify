@@ -69,7 +69,7 @@ export default function ForgotPassword() {
                 >
                     {/* Logo */}
                     <div className="mb-8 text-center">
-                        <Link to="/" className="inline-flex items-center gap-2 text-3xl font-display font-bold">
+                        <Link to="/" className="inline-flex items-center gap-2 text-3xl font-bold">
                             <Rocket className="h-8 w-8 text-primary" />
                             <span className="text-primary">Learn</span>
                             <span className="text-accent">ify</span>
@@ -83,7 +83,7 @@ export default function ForgotPassword() {
 
                         <div className="relative z-10">
                             <div className="text-center mb-8">
-                                <h2 className="font-display text-2xl font-bold text-slate-900 dark:text-white uppercase tracking-wide mb-2">
+                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white uppercase tracking-wide mb-2">
                                     <TranslatedText text="Forgot Password?" />
                                 </h2>
                                 <p className="text-muted-foreground text-sm">

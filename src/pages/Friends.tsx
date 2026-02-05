@@ -430,7 +430,7 @@ export default function Friends() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-slate-50 dark:bg-slate-900 p-6">
+            <div className="min-h-screen p-6" style={{ backgroundColor: '#14171e' }}>
                 <div className="max-w-6xl mx-auto">
                     <div className="animate-pulse space-y-4">
                         <div className="h-12 bg-obsidian rounded"></div>
@@ -453,14 +453,18 @@ export default function Friends() {
     });
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-6">
+        <div className="min-h-screen p-6" style={{ backgroundColor: '#14171e' }}>
             <div className="max-w-[1800px] mx-auto">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-6">
                     <div>
-                        <h1 className="text-3xl font-black text-primary flex items-center gap-3">
+                        <h1 className="text-3xl font-black flex items-center gap-3">
                             <Users className="h-8 w-8" />
-                            SOCIAL HUB
+                            <span>
+                              <span style={{ color:  '#d9fd77' }}>SOCIAL</span>
+                              {' '}
+                              <span style={{ color: '#6C5BA6' }}>HUB</span>
+                            </span>
                         </h1>
                         <p className="text-gray-400 mt-1 text-sm">
                             {onlineFriends.length} of {friends.length} friends online

@@ -1,3 +1,7 @@
+/* ================================================================================
+   LEARNIFY DESIGN SYSTEM - COMPLETE IMPLEMENTATION
+   ================================================================================ */
+
 /* Import Orbitron font for futuristic titles */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
 
@@ -14,134 +18,99 @@
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ================================================================================
+   DESIGN SYSTEM VARIABLES
+   ================================================================================ */
 
 @layer base {
   :root {
-    /* MODERN BRAND THEME - Black & Neon Lime & Purple */
-    --background: 0 0% 0%;
-    /* #000000 - Pure Black */
-    --foreground: 0 0% 100%;
-    /* #FFFFFF - Primary text */
+    /* MODERN DARK THEME - Professional Modern Dark UI */
+    --background: 216 19% 11%;             /* #161a20 - Main background */
+    --foreground: 0 0% 100%;               /* #FFFFFF - Primary text */
+    --card: 216 18% 11%;                   /* #171b21 - Cards/panels/navbar */
+    --card-foreground: 0 0% 100%;          /* #FFFFFF */
+    --popover: 225 13% 14%;                /* #1F2229 - Popovers */
+    --popover-foreground: 0 0% 100%;       /* #FFFFFF */
+    --muted: 228 10% 18%;                  /* #25272E - Muted surfaces */
+    --muted-foreground: 220 6% 66%;        /* #9FA3AE - Muted text */
+    --accent: 225 10% 21%;                 /* #31343B - Accents/inner panels */
+    --accent-foreground: 0 0% 100%;        /* #FFFFFF */
+    --border: 225 10% 21%;                 /* #31343B - Borders */
+    --input: 220 16% 11%;                  /* #171B21 - Input backgrounds */
 
-    --card: 217 33% 12%;
-    /* Dark Slate - Primary panels */
-    --card-foreground: 0 0% 100%;
+    /* BRAND COLORS */
+    --primary: 73 97% 73%;                 /* #DAFD78 - Neon Lime (main accent) */
+    --primary-foreground: 216 19% 11%;     /* #161a20 - Text on lime */
+    --secondary: 256 33% 50%;              /* #6C5BA6 - Purple (logo accent) */
+    --secondary-foreground: 0 0% 100%;     /* #FFFFFF - Text on purple */
 
-    --popover: 217 33% 10%;
-    /* Darker Slate - Popovers */
-    --popover-foreground: 0 0% 100%;
+    /* STATUS COLORS */
+    --destructive: 0 86% 63%;              /* #F85149 - Red/Error */
+    --destructive-foreground: 0 0% 100%;   /* #FFFFFF */
+    --success: 140 66% 48%;                /* #3FB950 - Green/Success */
+    --success-foreground: 0 0% 100%;       /* #FFFFFF */
+    --warning: 40 72% 49%;                 /* #D29922 - Yellow/Warning */
+    --warning-foreground: 216 19% 11%;     /* #161a20 */
 
-    --primary: 73 97% 73%;
-    /* #DAFD78 Neon Lime */
-    --primary-foreground: 0 0% 0%;
-
-    --secondary: 256 33% 50%;
-    /* #6C5BA6 Brand Purple (Logo ONLY) */
-    --secondary-foreground: 0 0% 100%;
-
-    --muted: 217 33% 12%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 73 97% 73%;
-    /* Neon Lime */
-    --accent-foreground: 0 0% 0%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217 33% 20%;
-    --input: 217 33% 12%;
-    --ring: 73 97% 73%;
-    /* Neon Lime focus */
-
-    --radius: 0.75rem;
+    /* FOCUS & INTERACTION */
+    --ring: 73 97% 73%;                    /* #DAFD78 - Focus ring (lime) */
+    --radius: 0.75rem;                     /* 12px - Border radius */
 
     /* Smooth transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .dark {
-    --background: 0 0% 0%;
+    --background: 216 19% 11%;
     --foreground: 0 0% 100%;
-
-    --card: 217 33% 12%;
+    --card: 216 18% 11%;
     --card-foreground: 0 0% 100%;
-
-    --popover: 217 33% 10%;
+    --popover: 225 13% 14%;
     --popover-foreground: 0 0% 100%;
-
     --primary: 73 97% 73%;
-    --primary-foreground: 0 0% 0%;
-
+    --primary-foreground: 216 19% 11%;
     --secondary: 256 33% 50%;
     --secondary-foreground: 0 0% 100%;
-
-    --muted: 217 33% 12%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 73 97% 73%;
-    --accent-foreground: 0 0% 0%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217 33% 20%;
-    --input: 217 33% 12%;
+    --muted: 228 10% 18%;
+    --muted-foreground: 220 6% 66%;
+    --accent: 225 10% 21%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 86% 63%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 140 66% 48%;
+    --success-foreground: 0 0% 100%;
+    --warning: 40 72% 49%;
+    --warning-foreground: 216 19% 11%;
+    --border: 225 10% 21%;
+    --input: 220 16% 11%;
     --ring: 73 97% 73%;
   }
 
   .light {
     /* Modern light theme */
-    --background: 0 0% 98%;
-    /* #FAFAFA - Clean white background */
-    --foreground: 228 29% 15%;
-    /* #1A1D28 - Dark text */
-
-    --card: 0 0% 100%;
-    /* #FFFFFF - White cards */
+    --background: 0 0% 98%;                /* #FAFAFA */
+    --foreground: 228 29% 15%;             /* #1A1D28 */
+    --card: 0 0% 100%;                     /* #FFFFFF */
     --card-foreground: 228 29% 15%;
-
     --popover: 0 0% 100%;
-    /* #FFFFFF - White popovers */
     --popover-foreground: 228 29% 15%;
-
-    --primary: 73 85% 45%;
-    /* #88D800 - Vibrant lime green (darker for light bg) */
+    --primary: 73 85% 45%;                 /* #88D800 - Darker lime for contrast */
     --primary-foreground: 0 0% 100%;
-
-    --secondary: 256 45% 55%;
-    /* #7B63C4 - Adjusted purple */
+    --secondary: 256 45% 55%;              /* #7B63C4 - Adjusted purple */
     --secondary-foreground: 0 0% 100%;
-
-    --muted: 220 13% 95%;
-    /* #F1F2F4 - Light gray surfaces */
+    --muted: 220 13% 95%;                  /* #F1F2F4 */
     --muted-foreground: 220 9% 38%;
-    /* Darker muted text for better contrast in light mode */
-
-    --accent: 220 13% 91%;
-    /* #E5E7EB - Subtle accent */
+    --accent: 220 13% 91%;                 /* #E5E7EB */
     --accent-foreground: 228 29% 15%;
-
-    --destructive: 0 84% 60%;
-    /* #F87171 - Red */
+    --destructive: 0 84% 60%;              /* #F87171 */
     --destructive-foreground: 0 0% 100%;
-
-    --success: 142 71% 45%;
-    /* #22C55E - Green */
+    --success: 142 71% 45%;                /* #22C55E */
     --success-foreground: 0 0% 100%;
-
-    --warning: 38 92% 50%;
-    /* #F59E0B - Amber */
-    --warning-foreground: 0 0% 100%;
-
+    --warning: 38 92% 50%;                 /* #F59E0B */
+    --warning-foreground: 216 19% 11%;
     --border: 220 13% 91%;
-    /* #E5E7EB - Light borders */
     --input: 0 0% 100%;
     --ring: 73 85% 45%;
-    /* Lime green focus */
   }
 
   .colorblind {
@@ -162,6 +131,10 @@ All colors MUST be HSL.
   }
 }
 
+/* ================================================================================
+   BASE STYLES
+   ================================================================================ */
+
 @layer base {
   * {
     @apply border-border;
@@ -169,6 +142,7 @@ All colors MUST be HSL.
 
   html {
     @apply bg-background;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -176,23 +150,45 @@ All colors MUST be HSL.
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
-  /* Neon Lime selection color */
+  /* Text Selection */
   ::selection {
     background-color: rgba(218, 253, 120, 0.3);
     color: #FFFFFF;
   }
 
-  /* Custom scrollbar */
+  ::-moz-selection {
+    background-color: rgba(218, 253, 120, 0.3);
+    color: #FFFFFF;
+  }
+
+  /* Main Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
   ::-webkit-scrollbar-track {
-    background: #000000;
+    background: #161a20;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #2D3748;
+    background: #31343B;
     border-radius: 5px;
   }
 
+  ::-webkit-scrollbar-thumb:hover {
+    background: #484F58;
+  }
+
   /* Thin scrollbar for sidebar */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
   .scrollbar-thin::-webkit-scrollbar-thumb {
     background: rgba(218, 253, 120, 0.2);
     border-radius: 2px;
@@ -202,7 +198,7 @@ All colors MUST be HSL.
     background: rgba(218, 253, 120, 0.4);
   }
 
-  /* Neon Lime focus states */
+  /* Focus States */
   input:focus,
   textarea:focus,
   select:focus,
@@ -210,30 +206,172 @@ All colors MUST be HSL.
     outline: 2px solid rgba(218, 253, 120, 0.6);
     outline-offset: 2px;
   }
+
+  /* Keyboard Navigation Focus */
+  *:focus-visible {
+    outline: 4px solid #DAFD78 !important;
+    outline-offset: 2px !important;
+  }
+
+  /* Dark Mode Date/Time Pickers */
+  .dark input[type='date']::-webkit-calendar-picker-indicator,
+  .dark input[type='time']::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
 }
 
+/* ================================================================================
+   COMPONENT STYLES
+   ================================================================================ */
+
+@layer components {
+  /* Primary Button (Lime Green) */
+  .btn-primary {
+    background: hsl(73 97% 73%);           /* #DAFD78 */
+    color: hsl(228 29% 7%);                /* #0C0E17 */
+    border-radius: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-primary:hover {
+    background: hsl(73 97% 73% / 0.9);
+  }
+
+  /* Secondary Button (Purple) */
+  .btn-secondary {
+    background: hsl(256 33% 50%);          /* #6C5BA6 */
+    color: hsl(0 0% 100%);                 /* #FFFFFF */
+    border-radius: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-secondary:hover {
+    background: hsl(256 33% 50% / 0.8);
+  }
+
+  /* Card Component */
+  .card {
+    background-color: hsl(220 16% 11%);    /* #171B21 */
+    color: hsl(0 0% 100%);                 /* #FFFFFF */
+    border: 1px solid hsl(225 10% 21%);    /* #31343B */
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Muted Panel */
+  .panel-muted {
+    background-color: hsl(228 10% 18%);    /* #25272E */
+    color: hsl(220 6% 66%);                /* #9FA3AE */
+    border-radius: 0.75rem;
+    padding: 1rem;
+  }
+
+  /* Accent Panel */
+  .panel-accent {
+    background-color: hsl(225 10% 21%);    /* #31343B */
+    color: hsl(0 0% 100%);                 /* #FFFFFF */
+    border-radius: 0.75rem;
+    padding: 1rem;
+  }
+
+  /* Status Indicators */
+  .status-success {
+    background: hsl(140 66% 48%);          /* #3FB950 */
+    color: hsl(0 0% 100%);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+  }
+
+  .status-error {
+    background: hsl(0 86% 63%);            /* #F85149 */
+    color: hsl(0 0% 100%);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+  }
+
+  .status-warning {
+    background: hsl(40 72% 49%);           /* #D29922 */
+    color: hsl(228 29% 7%);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+  }
+}
+
+/* ================================================================================
+   UTILITY CLASSES
+   ================================================================================ */
+
 @layer utilities {
+  /* Smooth Transition */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Gradient Backgrounds */
   .gradient-cosmic {
-    background: linear-gradient(135deg, #000000 0%, #171923 50%, #000000 100%);
+    background: linear-gradient(135deg, #161a20 0%, #171b21 50%, #161a20 100%);
   }
 
   .gradient-accent {
     background: linear-gradient(135deg, #DAFD78 0%, #6C5BA6 100%);
   }
+
+  /* Shimmer Effect */
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+
+  /* High Contrast Mode */
+  .high-contrast * {
+    border-width: 3px !important;
+    font-weight: 700 !important;
+  }
 }
 
-@layer base {
+/* ================================================================================
+   MOBILE OPTIMIZATIONS
+   ================================================================================ */
+
+@media (max-width: 768px) {
+  /* Touch Targets - Minimum 44x44px */
+  button, a, input[type="checkbox"], input[type="radio"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Container Padding */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Typography */
+  h1 { font-size: 2rem !important; }
+  h2 { font-size: 1.5rem !important; }
+}
+
+/* ================================================================================
+   ACCESSIBILITY
+   ================================================================================ */
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
   * {
-    @apply border-border;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
-
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-/* Accessibility Focus Indicators */
-*:focus-visible {
-  outline: 4px solid #DAFD78 !important;
-  outline-offset: 2px !important;
 }

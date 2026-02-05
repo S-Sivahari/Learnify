@@ -72,7 +72,7 @@ export default function LevelBadge({
 
                 {/* Level number */}
                 <motion.span
-                    className="relative z-10 font-display font-black bg-gradient-to-br from-primary via-yellow-400 to-primary bg-clip-text text-transparent"
+                    className="relative z-10 font-black bg-gradient-to-br from-primary via-yellow-400 to-primary bg-clip-text text-transparent"
                     animate={{
                         scale: [1, 1.05, 1],
                     }}

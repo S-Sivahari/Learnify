@@ -55,7 +55,11 @@ export default function SmartDeadlinePage() {
         >
           <h1 className="text-4xl font-black text-white mb-2 flex items-center gap-3">
             <Target className="w-10 h-10 text-[#C9B458]" />
-            Smart Deadline Radar
+            <span>
+              <span style={{ color: '#d9fd77' }}>Smart Deadline</span>
+              {' '}
+              <span style={{ color: '#6C5BA6' }}>Radar</span>
+            </span>
           </h1>
           <p className="text-white/70 text-lg">
             AI-powered deadline tracking and intelligent study pacing
