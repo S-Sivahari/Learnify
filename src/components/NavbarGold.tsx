@@ -39,7 +39,7 @@ export default function NavbarGold() {
             {isAuthenticated ? (
               <>
                 {user && (
-                  <div className="hidden md:block text-[#DAFD78] font-bold text-sm px-4 py-2 bg-slate-800 border border-[#DAFD78]/20 rounded-lg">
+                  <div className="hidden md:block text-white font-bold text-sm px-4 py-2 bg-slate-800 border border-[#DAFD78]/20 rounded-lg">
                     {user.name}
                   </div>
                 )}

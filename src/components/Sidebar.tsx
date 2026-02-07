@@ -39,11 +39,6 @@ const menuItems: MenuItem[] = [
   { path: '/notes', label: 'Notes', icon: StickyNote },
   { path: '/study-planner', label: 'Calendar', icon: Calendar },
   { path: '/focus-room', label: 'Focus Room', icon: Clock },
-  { path: '/opportunities', label: 'Opportunities', icon: Target },
-  { path: '/sign-language', label: 'Sign Language', icon: Hand },
-  { path: '/game-hub', label: 'Game Center', icon: Gamepad2 },
-  { path: '/study-vr', label: 'VR Study', icon: Glasses },
-  { path: '/friends', label: 'Friends', icon: Users },
   { path: '/profile', label: 'Profile', icon: User },
 ];
 
@@ -96,14 +91,14 @@ export default function Sidebar({ className }: SidebarProps) {
                   "flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group",
                   isActive
                     ? "font-semibold text-black"
-                    : "text-gray-400 hover:bg-slate-800/30 hover:text-white"
+                    : "font-bold text-gray-200 hover:bg-slate-800/30"
                 )}
                 style={isActive ? { backgroundColor: '#d9fd77' } : {}}
                 title={isCollapsed ? item.label : undefined}
               >
                 <Icon className={cn(
                   "w-5 h-5 flex-shrink-0 transition-transform group-hover:scale-110",
-                  isActive ? "text-black" : "text-gray-500"
+                  isActive ? "text-black" : "text-gray-200"
                 )} />
                 {!isCollapsed && (
                   <span className="text-sm truncate">{item.label}</span>

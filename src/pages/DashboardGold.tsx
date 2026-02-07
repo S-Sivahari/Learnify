@@ -11,7 +11,6 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { ExamCountdownWidget } from '@/components/ExamCountdownWidget';
-import { FriendsWidget } from '@/components/dashboard/FriendsWidget';
 import { SpotifyMiniPlayer } from '@/components/integrations/SpotifyMiniPlayer';
 import { MOCK_ANALYTICS, MOCK_ACTIVITY_LOG, MOCK_TASKS, USE_MOCK_DATA, MOCK_GAME_LEADERBOARD } from '@/mocks';
 import { MOCK_GAMES, MOCK_PLAYER_PROFILE } from '@/mocks/gameHub';
@@ -585,9 +584,6 @@ export default function DashboardGold() {
                 {user?.id && <HabitTracker userId={user.id} />}
               </CardContent>
             </Card>
-
-            {/* Grid 8: Friends */}
-            <FriendsWidget />
 
           </div>
         </div>
